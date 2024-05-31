@@ -69,10 +69,10 @@ class HomeScreen extends StatelessWidget {
             color: Colors.grey,
             rippleColor: Colors.green[300]!,
             activeColor: Colors.grey.shade700,
-            tabActiveBorder: Border.all(color: Colors.white),
+            tabActiveBorder: Border.all(color: Colors.grey.shade700),
             tabBackgroundColor: Colors.grey.shade100,
-            mainAxisAlignment: MainAxisAlignment.center,
-            padding: const EdgeInsets.all(8),
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            padding: const EdgeInsets.all(6),
             tabs: [
               GButton(
                 icon: Icons.home,
