@@ -29,7 +29,8 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   flutter:
-    sdk: flutter
+    sdk: flutter  
+  google_nav_bar: ^5.0.6
     
   firebase_core: ^2.16.0
 
