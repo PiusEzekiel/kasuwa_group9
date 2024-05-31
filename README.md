@@ -17,17 +17,24 @@ For help getting started with Flutter development, view the
 samples, guidance on mobile development, and a full API reference.
 
 
-# Kusawa
+## Kusawa
 Kasuwa is a mobile application to equip smallholder farmers with a secure and
 user-friendly platform to sell their produce to consumers.
 
--- Kuwasa Will have the following features: : A virtual Marketplace, easy traceability, Community forum, and a delivery feature.
+-- Kuwasa Will have the following features : A virtual Marketplace, easy traceability, Community forum, and a delivery feature.
 
-## What makes Kusawa Different?
+### What makes Kusawa Different?
 Kuwasa stands out with its;
+
 ● Logistics optimization
+
 ● Customer Stories
+
 ● Multilingual Support
+
 ● Real-time Chat Support
+
 ● Market insights:
+
 ● Feedback and Improvement System
+>>>>>>> e49deee84bbcfc8174ea4700cf70a7ebe7b96e9a
