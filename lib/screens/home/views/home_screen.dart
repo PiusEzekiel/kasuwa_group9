@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_unnecessary_containers, prefer_const_literals_to_create_immutables, prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -65,7 +67,7 @@ class HomeScreen extends StatelessWidget {
         ),
         bottomNavigationBar: Container(
           child: GNav(
-            color: Colors.grey,
+            backgroundColor: Colors.blueGrey,
             tabs: [
               GButton(
                 icon: Icons.home,
