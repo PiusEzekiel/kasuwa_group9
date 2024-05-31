@@ -66,8 +66,8 @@ class HomeScreen extends StatelessWidget {
         bottomNavigationBar: Container(
           padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 20),
           child: GNav(
-            rippleColor: Colors.green[300]!,
             color: Colors.grey,
+            rippleColor: Colors.green[300]!,
             activeColor: Colors.grey.shade700,
             tabActiveBorder: Border.all(color: Colors.white),
             tabBackgroundColor: Colors.grey.shade100,
