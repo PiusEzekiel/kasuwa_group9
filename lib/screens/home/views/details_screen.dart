@@ -104,32 +104,58 @@ class DetailScreen extends StatelessWidget {
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(10),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.2),
-                                  blurRadius: 10,
-                                  offset: const Offset(2, 2),
-                                ),
-                              ],
+                              // boxShadow: [
+                              //   BoxShadow(
+                              //     color: Colors.black.withOpacity(0.2),
+                              //     blurRadius: 10,
+                              //     offset: const Offset(2, 2),
+                              //   ),
+                              // ],
                             ),
                             child: const Padding(
                               padding: EdgeInsets.all(8.0),
                               child: Column(
                                 children: [
-                                  Icon(Icons.shopping_cart,
-                                      size: 30, color: Colors.red),
-                                  Text('4000',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.normal,
-                                        fontSize: 12,
-                                      )),
+                                  // Icon(Icons.shopping_cart,
+                                  //     size: 30, color: Colors.red),
+                                  Text(
+                                    'Original bananas, naturally grown without any chemicals in the fertile soils of Rwanda. They are sweet and delicious.',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.normal,
+                                      fontSize: 14,
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
                           ),
                         ),
                       ],
+                    ),
+                    const SizedBox(height: 20),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      height: 50,
+                      child: TextButton(
+                        onPressed: () {},
+                        style: TextButton.styleFrom(
+                          elevation: 3.0,
+                          backgroundColor:
+                              Theme.of(context).colorScheme.primary,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        child: const Text(
+                          'Add to Cart',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),
+                        ),
+                      ),
                     ),
                   ],
                 ),
