@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kasuwa/screens/auth/blocs/sign_in_bloc/sign_in_bloc.dart';
 
@@ -158,35 +159,47 @@ class HomeScreen extends StatelessWidget {
                           horizontal: 12,
                           vertical: 4,
                         ),
+                        //changing row to column
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Row(
-                              children: [
-                                Text('RWF 500',
-                                    style: TextStyle(
-                                      color:
-                                          Theme.of(context).colorScheme.primary,
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 15,
-                                    )),
-                                const SizedBox(
-                                  width: 8,
+                            Expanded(
+                              flex: 1,
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text('RWF 500.00',
+                                        style: TextStyle(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .primary,
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 16,
+                                        )),
+                                    // const SizedBox(
+                                    //   height: 2,
+                                    // ),
+                                    const Text(
+                                      'RWF 1000.00',
+                                      style: TextStyle(
+                                        color: Colors.grey,
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 12,
+                                        decoration: TextDecoration.lineThrough,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                const Text(
-                                  'RWF 1000',
-                                  style: TextStyle(
-                                    color: Colors.grey,
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 11,
-                                    decoration: TextDecoration.lineThrough,
-                                  ),
-                                ),
-                              ],
+                              ),
                             ),
                             IconButton(
                               onPressed: () {},
-                              icon: Icon(Icons.add_circle_outline_sharp),
+                              icon: const Icon(
+                                Icons.add_circle_outline_sharp,
+                                size: 35,
+                              ),
                             )
                           ],
                         ),

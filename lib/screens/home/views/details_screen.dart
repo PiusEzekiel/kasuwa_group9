@@ -61,7 +61,7 @@ class DetailScreen extends StatelessWidget {
                             style: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.bold,
-                              fontSize: 20,
+                              fontSize: 25,
                             ),
                           ),
                         ),
@@ -73,7 +73,7 @@ class DetailScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 Text(
-                                  'RWF 500',
+                                  'RWF 500.00',
                                   style: TextStyle(
                                     color:
                                         Theme.of(context).colorScheme.primary,
@@ -82,7 +82,7 @@ class DetailScreen extends StatelessWidget {
                                   ),
                                 ),
                                 const Text(
-                                  'RWF 1000',
+                                  'RWF 1000.00',
                                   style: TextStyle(
                                     color: Colors.grey,
                                     fontWeight: FontWeight.w700,
@@ -123,7 +123,7 @@ class DetailScreen extends StatelessWidget {
                                     style: TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.normal,
-                                      fontSize: 14,
+                                      fontSize: 16,
                                     ),
                                   ),
                                 ],
