@@ -3,8 +3,8 @@ import '../entities/kasuwa_entity.dart';
 class Kasuwa {
   String kasuwaId;
   String picture;
-  bool isVeg;
-  int spicy;
+  bool isFresh;
+  int pieces;
   String name;
   String description;
   double price;
@@ -14,8 +14,8 @@ class Kasuwa {
   Kasuwa({
     required this.kasuwaId,
     required this.picture,
-    required this.isVeg,
-    required this.spicy,
+    required this.isFresh,
+    required this.pieces,
     required this.name,
     required this.description,
     required this.price,
@@ -27,8 +27,8 @@ class Kasuwa {
     return KasuwaEntity(
       kasuwaId: kasuwaId,
       picture: picture,
-      isVeg: isVeg,
-      spicy: spicy,
+      isFresh: isFresh,
+      pieces: pieces,
       name: name,
       description: description,
       price: price,
@@ -41,8 +41,8 @@ class Kasuwa {
     return Kasuwa(
       kasuwaId: entity.kasuwaId,
       picture: entity.picture,
-      isVeg: entity.isVeg,
-      spicy: entity.spicy,
+      isFresh: entity.isFresh,
+      pieces: entity.pieces,
       name: entity.name,
       description: entity.description,
       price: entity.price,

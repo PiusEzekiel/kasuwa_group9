@@ -40,6 +40,9 @@ dependencies:
 
   user_repository:
     path: packages/user_repository
+  kasuwa_repository:
+    path: packages/kasuwa_repository
+
 
 
   # The following adds the Cupertino Icons font to your application.

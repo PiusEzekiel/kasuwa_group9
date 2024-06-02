@@ -1,8 +1,8 @@
 class KasuwaEntity {
   String kasuwaId;
   String picture;
-  bool isVeg;
-  int spicy;
+  bool isFresh;
+  int pieces;
   String name;
   String description;
   double price;
@@ -12,8 +12,8 @@ class KasuwaEntity {
   KasuwaEntity({
     required this.kasuwaId,
     required this.picture,
-    required this.isVeg,
-    required this.spicy,
+    required this.isFresh,
+    required this.pieces,
     required this.name,
     required this.description,
     required this.price,
@@ -25,8 +25,8 @@ class KasuwaEntity {
     return {
       'kasuwaId': kasuwaId,
       'picture': picture,
-      'isVeg': isVeg,
-      'spicy': spicy,
+      'isFresh': isFresh,
+      'pieces': pieces,
       'name': name,
       'description': description,
       'price': price,
@@ -39,8 +39,8 @@ class KasuwaEntity {
     return KasuwaEntity(
       kasuwaId: doc['kasuwaId'],
       picture: doc['picture'],
-      isVeg: doc['isVeg'],
-      spicy: doc['spicy'],
+      isFresh: doc['isFresh'],
+      pieces: doc['pieces'],
       name: doc['name'],
       description: doc['description'],
       price: doc['price'],

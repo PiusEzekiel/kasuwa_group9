@@ -96,6 +96,48 @@ class DetailScreen extends StatelessWidget {
                         ),
                       ],
                     ),
+
+                    // //trying to display freshness and pieces
+                    // Container(
+                    //   decoration: BoxDecoration(
+                    //     color: Colors.red,
+                    //     borderRadius: BorderRadius.circular(10),
+                    //   ),
+                    //   child: const Padding(
+                    //     padding:
+                    //         EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+                    //     child: Text(
+                    //       'pieces',
+                    //       style: TextStyle(
+                    //         color: Colors.white,
+                    //         fontWeight: FontWeight.bold,
+                    //         fontSize: 8,
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
+                    // const SizedBox(
+                    //   width: 8,
+                    // ),
+                    // Container(
+                    //   decoration: BoxDecoration(
+                    //     color: Colors.green.withOpacity(0.6),
+                    //     borderRadius: BorderRadius.circular(10),
+                    //   ),
+                    //   child: const Padding(
+                    //     padding:
+                    //         EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+                    //     child: Text(
+                    //       'Fresh',
+                    //       style: TextStyle(
+                    //         color: Colors.white,
+                    //         fontWeight: FontWeight.bold,
+                    //         fontSize: 8,
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
+
                     const SizedBox(height: 10),
                     Row(
                       children: [

@@ -93,7 +93,7 @@ class HomeScreen extends StatelessWidget {
                                 padding: EdgeInsets.symmetric(
                                     horizontal: 6, vertical: 3),
                                 child: Text(
-                                  'Bananas',
+                                  'pieces',
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
@@ -114,7 +114,7 @@ class HomeScreen extends StatelessWidget {
                                 padding: EdgeInsets.symmetric(
                                     horizontal: 6, vertical: 3),
                                 child: Text(
-                                  'BALANCE',
+                                  'Fresh',
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
