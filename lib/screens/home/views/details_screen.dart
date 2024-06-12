@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:kasuwa_repository/kasuwa_repository.dart';
 
 class DetailScreen extends StatelessWidget {
-  const DetailScreen({super.key});
+  final Kasuwa kasuwa;
+  const DetailScreen(this.kasuwa, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.background,
+        backgroundColor: Theme.of(context).colorScheme.surface,
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
@@ -28,8 +29,12 @@ class DetailScreen extends StatelessWidget {
                     offset: const Offset(0, 10),
                   ),
                 ],
-                image: const DecorationImage(
-                  image: AssetImage('images/bananas.png'),
+
+                // image: DecorationImage
+                image: DecorationImage(
+                  image: NetworkImage(
+                    kasuwa.picture,
+                  ),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -48,17 +53,18 @@ class DetailScreen extends StatelessWidget {
                 ],
               ),
               child: Padding(
-                padding: EdgeInsets.all(18.0),
+                padding: const EdgeInsets.all(18.0),
                 child: Column(
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Expanded(
+                        Expanded(
                           flex: 2,
+                          //name of the product
                           child: Text(
-                            'Sweet Bananas',
-                            style: TextStyle(
+                            kasuwa.name,
+                            style: const TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.bold,
                               fontSize: 25,
@@ -66,14 +72,14 @@ class DetailScreen extends StatelessWidget {
                           ),
                         ),
                         Expanded(
-                          flex: 1,
+                          flex: 2,
                           child: Align(
                             alignment: Alignment.centerRight,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 Text(
-                                  'RWF 500.00',
+                                  "RWF ${kasuwa.price - (kasuwa.price * (kasuwa.discount / 100))}0",
                                   style: TextStyle(
                                     color:
                                         Theme.of(context).colorScheme.primary,
@@ -81,9 +87,10 @@ class DetailScreen extends StatelessWidget {
                                     fontSize: 20,
                                   ),
                                 ),
-                                const Text(
-                                  'RWF 1000.00',
-                                  style: TextStyle(
+                                //price
+                                Text(
+                                  "RWF ${kasuwa.price}.00",
+                                  style: const TextStyle(
                                     color: Colors.grey,
                                     fontWeight: FontWeight.w700,
                                     fontSize: 14,
@@ -154,15 +161,16 @@ class DetailScreen extends StatelessWidget {
                               //   ),
                               // ],
                             ),
-                            child: const Padding(
+                            child: Padding(
                               padding: EdgeInsets.all(8.0),
                               child: Column(
                                 children: [
                                   // Icon(Icons.shopping_cart,
                                   //     size: 30, color: Colors.red),
                                   Text(
-                                    'Original bananas, naturally grown without any chemicals in the fertile soils of Rwanda. They are sweet and delicious.',
-                                    style: TextStyle(
+                                    // 'Original bananas, naturally grown without any chemicals in the fertile soils of Rwanda. They are sweet and delicious.',
+                                    kasuwa.detailsDescription,
+                                    style: const TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.normal,
                                       fontSize: 16,

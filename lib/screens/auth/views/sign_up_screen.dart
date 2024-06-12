@@ -165,21 +165,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 ? Theme.of(context)
                                     .colorScheme
                                     .primary //use primary color if true
-                                : Theme.of(context).colorScheme.onBackground),
+                                : Theme.of(context).colorScheme.onSurface),
                       ),
                       Text(
                         "⚈  1 lowercase",
                         style: TextStyle(
                             color: containsLowerCase
                                 ? Theme.of(context).colorScheme.primary
-                                : Theme.of(context).colorScheme.onBackground),
+                                : Theme.of(context).colorScheme.onSurface),
                       ),
                       Text(
                         "⚈  1 number",
                         style: TextStyle(
                             color: containsNumber
                                 ? Theme.of(context).colorScheme.primary
-                                : Theme.of(context).colorScheme.onBackground),
+                                : Theme.of(context).colorScheme.onSurface),
                       ),
                     ],
                   ),
@@ -191,14 +191,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         style: TextStyle(
                             color: containsSpecialChar
                                 ? Theme.of(context).colorScheme.primary
-                                : Theme.of(context).colorScheme.onBackground),
+                                : Theme.of(context).colorScheme.onSurface),
                       ),
                       Text(
                         "⚈  8 minimum character",
                         style: TextStyle(
                             color: contains8Length
                                 ? Theme.of(context).colorScheme.primary
-                                : Theme.of(context).colorScheme.onBackground),
+                                : Theme.of(context).colorScheme.onSurface),
                       ),
                     ],
                   ),

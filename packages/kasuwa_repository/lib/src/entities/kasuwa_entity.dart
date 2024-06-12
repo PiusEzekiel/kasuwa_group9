@@ -1,19 +1,20 @@
 class KasuwaEntity {
-  String kasuwaId;
-  String picture;
+  dynamic kasuwaId;
+  dynamic picture;
   bool isFresh;
-  int pieces;
-  String name;
-  String description;
-  double price;
-  double discount;
-  String detailsDescription;
+  // int pieces;
+  dynamic name;
+  dynamic description;
+
+  dynamic price;
+  dynamic discount;
+  dynamic detailsDescription;
 
   KasuwaEntity({
     required this.kasuwaId,
     required this.picture,
     required this.isFresh,
-    required this.pieces,
+    // required this.pieces,
     required this.name,
     required this.description,
     required this.price,
@@ -26,7 +27,7 @@ class KasuwaEntity {
       'kasuwaId': kasuwaId,
       'picture': picture,
       'isFresh': isFresh,
-      'pieces': pieces,
+      // 'pieces': pieces,
       'name': name,
       'description': description,
       'price': price,
@@ -40,7 +41,7 @@ class KasuwaEntity {
       kasuwaId: doc['kasuwaId'],
       picture: doc['picture'],
       isFresh: doc['isFresh'],
-      pieces: doc['pieces'],
+      // pieces: doc['pieces'],
       name: doc['name'],
       description: doc['description'],
       price: doc['price'],

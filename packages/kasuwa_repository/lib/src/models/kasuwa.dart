@@ -1,21 +1,21 @@
 import '../entities/kasuwa_entity.dart';
 
 class Kasuwa {
-  String kasuwaId;
-  String picture;
+  dynamic kasuwaId;
+  dynamic picture;
   bool isFresh;
-  int pieces;
-  String name;
-  String description;
-  double price;
-  double discount;
-  String detailsDescription;
+  // int pieces;
+  dynamic name;
+  dynamic description;
+  dynamic price;
+  dynamic discount;
+  dynamic detailsDescription;
 
   Kasuwa({
     required this.kasuwaId,
     required this.picture,
     required this.isFresh,
-    required this.pieces,
+    // required this.pieces,
     required this.name,
     required this.description,
     required this.price,
@@ -28,7 +28,7 @@ class Kasuwa {
       kasuwaId: kasuwaId,
       picture: picture,
       isFresh: isFresh,
-      pieces: pieces,
+      // pieces: pieces,
       name: name,
       description: description,
       price: price,
@@ -42,7 +42,7 @@ class Kasuwa {
       kasuwaId: entity.kasuwaId,
       picture: entity.picture,
       isFresh: entity.isFresh,
-      pieces: entity.pieces,
+      // pieces: entity.pieces,
       name: entity.name,
       description: entity.description,
       price: entity.price,
