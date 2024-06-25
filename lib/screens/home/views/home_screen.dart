@@ -54,8 +54,9 @@ class HomeScreen extends StatelessWidget {
               return GridView.builder(
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
-                      crossAxisSpacing: 15,
-                      mainAxisSpacing: 15,
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10,
+                      //will change the aspect ratio to 9/18
                       childAspectRatio: 9 / 16),
 
                   //returning 4 items for now
