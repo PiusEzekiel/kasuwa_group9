@@ -97,11 +97,13 @@ class FirstWelcomeScreen extends StatelessWidget {
                           height: 50,
                           child: TextButton(
                             onPressed: () {
+                              Navigator.pop(context);
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
                                           const WelcomeScreen()));
+                              // Navigator.of(context).pop();
                             },
                             style: TextButton.styleFrom(
                               elevation: 3.0,
@@ -137,7 +139,8 @@ class FirstWelcomeScreen extends StatelessWidget {
                           fit: BoxFit.scaleDown,
                           scale: 0.5),
                       shape: BoxShape.circle,
-                      color: Theme.of(context).colorScheme.onPrimary),
+                      // color: Theme.of(context).colorScheme.onPrimary
+                      color: Colors.grey.shade300),
                 ),
               ),
             ],

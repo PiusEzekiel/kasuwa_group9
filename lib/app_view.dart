@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kasuwa/blocs/authentication_bloc/authentication_bloc.dart';
 import 'package:kasuwa/screens/auth/blocs/sign_in_bloc/sign_in_bloc.dart';
-import 'package:kasuwa/screens/auth/views/first_welcome_screen.dart';
+
 import 'package:kasuwa/screens/home/blocs/get_kasuwa_bloc/get_kasuwa_bloc.dart';
 import 'package:kasuwa_repository/kasuwa_repository.dart';
 
+// import 'screens/auth/views/welcome_screen.dart';
 import 'screens/auth/views/welcome_screen.dart';
+// import 'screens/auth/views/first_welcome_screen.dart';
 import 'screens/home/views/home_screen.dart';
 
 class MyAppView extends StatelessWidget {
@@ -44,9 +46,15 @@ class MyAppView extends StatelessWidget {
                 ],
                 child: const HomeScreen(),
               );
-            } else {
-              // return const WelcomeScreen();
-              return const FirstWelcomeScreen();
+            }
+            // else if (state.status == AuthenticationStatus.unauthenticated) {
+            //   //
+            //   return const FirstWelcomeScreen();
+            //   // return const WelcomeScreen();
+            // }
+            else {
+              return const WelcomeScreen();
+              // return const FirstWelcomeScreen();
             }
           }),
         ));

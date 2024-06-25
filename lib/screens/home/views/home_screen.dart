@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kasuwa/components/my_drawer.dart';
 import 'package:kasuwa/screens/auth/blocs/sign_in_bloc/sign_in_bloc.dart';
 import 'package:kasuwa/screens/home/blocs/get_kasuwa_bloc/get_kasuwa_bloc.dart';
 
@@ -45,6 +46,7 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
+      drawer: MyDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: BlocBuilder<GetKasuwaBloc, GetKasuwaState>(
@@ -57,7 +59,7 @@ class HomeScreen extends StatelessWidget {
                       crossAxisSpacing: 10,
                       mainAxisSpacing: 10,
                       //will change the aspect ratio to 9/18
-                      childAspectRatio: 9 / 16),
+                      childAspectRatio: 9 / 17),
 
                   //returning 4 items for now
                   // state.kasuwas.length, to return all items on the list on firebase
