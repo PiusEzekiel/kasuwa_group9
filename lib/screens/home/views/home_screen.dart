@@ -4,7 +4,7 @@ import 'package:kasuwa/components/my_drawer.dart';
 import 'package:kasuwa/screens/home/blocs/get_kasuwa_bloc/get_kasuwa_bloc.dart';
 import 'package:kasuwa/screens/auth/views/cart_screen.dart';
 
-import '../../../models/cart_item.dart';
+// import '../../../models/cart_item.dart';
 import 'details_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -15,7 +15,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final List<CartItem> cartItems = [];
+  // final List<CartItem> cartItems = [];
 
   @override
   Widget build(BuildContext context) {
@@ -50,13 +50,13 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.push<void>(
-                  context,
-                  MaterialPageRoute(
-                    builder: (BuildContext context) => CartScreen(
-                      cartItems: cartItems,
-                    ),
-                  ));
+              // Navigator.push<void>(
+              //     context,
+              //     MaterialPageRoute(
+              //       builder: (BuildContext context) => CartScreen(
+              //         cartItems: cartItems,
+              //       ),
+              //     ));
             },
             icon: const Icon(Icons.shopping_cart, size: 30, color: Colors.red),
           ),
