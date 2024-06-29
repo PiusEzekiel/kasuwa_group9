@@ -50,13 +50,13 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.push<void>(
-                  context,
-                  MaterialPageRoute(
-                    builder: (BuildContext context) => CartScreen(
-                      cartItems: cartItems,
-                    ),
-                  ));
+              // Navigator.push<void>(
+              //     context,
+              //     MaterialPageRoute(
+              //       builder: (BuildContext context) => CartScreen(
+              //         // cartItems: cartItems,
+              //       ),
+              //     ));
             },
             icon: const Icon(Icons.shopping_cart, size: 30, color: Colors.red),
           ),
