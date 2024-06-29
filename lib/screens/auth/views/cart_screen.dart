@@ -1,4 +1,4 @@
-// ignore_for_file: library_private_types_in_public_api, use_key_in_widget_constructors
+// ignore_for_file: library_private_types_in_public_api, use_key_in_widget_constructors, unused_import
 
 import 'package:flutter/material.dart';
 
@@ -36,7 +36,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
       home: Scaffold(
         appBar: AppBar(
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back_ios),
+            icon: const Icon(Icons.arrow_back),
             onPressed: () {
               Navigator.of(context).pop();
             },

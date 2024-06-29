@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kasuwa/components/my_drawer.dart';
@@ -50,13 +52,13 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           IconButton(
             onPressed: () {
-              // Navigator.push<void>(
-              //     context,
-              //     MaterialPageRoute(
-              //       builder: (BuildContext context) => CartScreen(
-              //         // cartItems: cartItems,
-              //       ),
-              //     ));
+              Navigator.push<void>(
+                  context,
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => ShoppingCartScreen(
+                      cartItems: cartItems,
+                    ),
+                  ));
             },
             icon: const Icon(Icons.shopping_cart, size: 30, color: Colors.red),
           ),
