@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:kasuwa_repository/kasuwa_repository.dart';
 
-class DetailScreen extends StatelessWidget {
+import '../../../models/cart_item.dart';
+import 'package:collection/collection.dart'; // Import the collection package
+
+class DetailScreen extends StatefulWidget {
   final Kasuwa kasuwa;
   const DetailScreen(this.kasuwa, {super.key});
+
+  @override
+  State<DetailScreen> createState() => _DetailScreenState();
+}
+
+class _DetailScreenState extends State<DetailScreen> {
+  final List<CartItem> cartItems = [];
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +26,7 @@ class DetailScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
         child: Column(
           children: [
+            // Product Image
             Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.width - (40),
@@ -29,17 +40,17 @@ class DetailScreen extends StatelessWidget {
                     offset: const Offset(0, 10),
                   ),
                 ],
-
-                // image: DecorationImage
                 image: DecorationImage(
                   image: NetworkImage(
-                    kasuwa.picture,
+                    widget.kasuwa.picture,
                   ),
                   fit: BoxFit.cover,
                 ),
               ),
             ),
             const SizedBox(height: 20),
+
+            // Product Details
             Container(
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -55,15 +66,16 @@ class DetailScreen extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(18.0),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    // Product Name and Price
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Expanded(
                           flex: 2,
-                          //name of the product
                           child: Text(
-                            kasuwa.name,
+                            widget.kasuwa.name,
                             style: const TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.bold,
@@ -79,7 +91,7 @@ class DetailScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 Text(
-                                  "RWF ${kasuwa.price - (kasuwa.price * (kasuwa.discount / 100))}0",
+                                  "RWF ${widget.kasuwa.price - (widget.kasuwa.price * (widget.kasuwa.discount / 100))}0",
                                   style: TextStyle(
                                     color:
                                         Theme.of(context).colorScheme.primary,
@@ -87,9 +99,8 @@ class DetailScreen extends StatelessWidget {
                                     fontSize: 20,
                                   ),
                                 ),
-                                //price
                                 Text(
-                                  "RWF ${kasuwa.price}.00",
+                                  "RWF ${widget.kasuwa.price}.00",
                                   style: const TextStyle(
                                     color: Colors.grey,
                                     fontWeight: FontWeight.w700,
@@ -103,92 +114,28 @@ class DetailScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-
-                    // //trying to display freshness and pieces
-                    // Container(
-                    //   decoration: BoxDecoration(
-                    //     color: Colors.red,
-                    //     borderRadius: BorderRadius.circular(10),
-                    //   ),
-                    //   child: const Padding(
-                    //     padding:
-                    //         EdgeInsets.symmetric(horizontal: 6, vertical: 3),
-                    //     child: Text(
-                    //       'pieces',
-                    //       style: TextStyle(
-                    //         color: Colors.white,
-                    //         fontWeight: FontWeight.bold,
-                    //         fontSize: 8,
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
-                    // const SizedBox(
-                    //   width: 8,
-                    // ),
-                    // Container(
-                    //   decoration: BoxDecoration(
-                    //     color: Colors.green.withOpacity(0.6),
-                    //     borderRadius: BorderRadius.circular(10),
-                    //   ),
-                    //   child: const Padding(
-                    //     padding:
-                    //         EdgeInsets.symmetric(horizontal: 6, vertical: 3),
-                    //     child: Text(
-                    //       'Fresh',
-                    //       style: TextStyle(
-                    //         color: Colors.white,
-                    //         fontWeight: FontWeight.bold,
-                    //         fontSize: 8,
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
-
                     const SizedBox(height: 10),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10),
-                              // boxShadow: [
-                              //   BoxShadow(
-                              //     color: Colors.black.withOpacity(0.2),
-                              //     blurRadius: 10,
-                              //     offset: const Offset(2, 2),
-                              //   ),
-                              // ],
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                children: [
-                                  // Icon(Icons.shopping_cart,
-                                  //     size: 30, color: Colors.red),
-                                  Text(
-                                    // 'Original bananas, naturally grown without any chemicals in the fertile soils of Rwanda. They are sweet and delicious.',
-                                    kasuwa.detailsDescription,
-                                    style: const TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.normal,
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
+
+                    // Product Description
+                    Text(
+                      widget.kasuwa.detailsDescription,
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.normal,
+                        fontSize: 16,
+                      ),
                     ),
                     const SizedBox(height: 20),
+
+                    // Add to Cart Button
                     SizedBox(
                       width: MediaQuery.of(context).size.width,
                       height: 50,
                       child: TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          _addToCart(
+                              widget.kasuwa); // Call the _addToCart function
+                        },
                         style: TextButton.styleFrom(
                           elevation: 3.0,
                           backgroundColor:
@@ -210,10 +157,60 @@ class DetailScreen extends StatelessWidget {
                   ],
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
     );
+  }
+
+  // Add to Cart Logic
+  void _addToCart(Kasuwa kasuwa) {
+    setState(() {
+      // Find existing item in the cart
+      CartItem? existingItem = cartItems.firstWhereOrNull(
+        (item) => item.kasuwa == kasuwa,
+      );
+
+      if (existingItem != null) {
+        // Increase quantity of existing item
+        existingItem.quantity++;
+      } else {
+        // Add new item to the cart
+        cartItems.add(CartItem(kasuwa: kasuwa, quantity: 1));
+      }
+    });
+  }
+
+  // Remove from Cart Logic
+  void _removeFromCart(Kasuwa kasuwa) {
+    setState(() {
+      cartItems.removeWhere((item) => item.kasuwa == kasuwa);
+    });
+  }
+
+  // Get Total Price
+  double get totalPrice {
+    double total = 0;
+    for (CartItem cartItem in cartItems) {
+      total += cartItem.totalPrice;
+    }
+    return total;
+  }
+
+  // Get Total Quantity
+  int get totalQuantity {
+    int total = 0;
+    for (CartItem cartItem in cartItems) {
+      total += cartItem.quantity;
+    }
+    return total;
+  }
+
+  // Clear Cart Logic
+  void _clearCart() {
+    setState(() {
+      cartItems.clear();
+    });
   }
 }

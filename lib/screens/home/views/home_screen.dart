@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kasuwa/components/my_drawer.dart';
-import 'package:kasuwa/screens/auth/blocs/sign_in_bloc/sign_in_bloc.dart';
 import 'package:kasuwa/screens/home/blocs/get_kasuwa_bloc/get_kasuwa_bloc.dart';
+import 'package:kasuwa/screens/auth/views/cart_screen.dart';
 
+import '../../../models/cart_item.dart';
 import 'details_screen.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final List<CartItem> cartItems = [];
 
   @override
   Widget build(BuildContext context) {
@@ -15,35 +23,49 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.surface,
-        title: Row(
-          children: [
-            Image.asset(
-              'images/kasuwa_logo.png',
-              scale: 10,
+        title: Flexible(
+          // padding: const EdgeInsets.only(left: 55.0, right: 50.0),
+          child: Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  'images/kasuwa_logo.png',
+                  scale: 10,
+                ),
+                const SizedBox(
+                  width: 1,
+                ),
+                // const Text(
+                //   'asuwa',
+                //   style: TextStyle(
+                //     fontWeight: FontWeight.w900,
+                //     fontSize: 25,
+                //   ),
+                // ),
+              ],
             ),
-            const SizedBox(
-              width: 1,
-            ),
-            const Text(
-              'asuwa',
-              style: TextStyle(
-                fontWeight: FontWeight.w900,
-                fontSize: 25,
-              ),
-            ),
-          ],
+          ),
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push<void>(
+                  context,
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => CartScreen(
+                      cartItems: cartItems,
+                    ),
+                  ));
+            },
             icon: const Icon(Icons.shopping_cart, size: 30, color: Colors.red),
           ),
-          IconButton(
-            onPressed: () {
-              context.read<SignInBloc>().add(SignOutRequired());
-            },
-            icon: const Icon(Icons.logout_outlined),
-          ),
+          // IconButton(
+          //   onPressed: () {
+          //     context.read<SignInBloc>().add(SignOutRequired());
+          //   },
+          //   icon: const Icon(Icons.logout_outlined),
+          // ),
         ],
       ),
       drawer: const MyDrawer(),
