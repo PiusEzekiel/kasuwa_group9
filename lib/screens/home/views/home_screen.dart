@@ -6,7 +6,7 @@ import 'package:kasuwa/components/my_drawer.dart';
 import 'package:kasuwa/screens/home/blocs/get_kasuwa_bloc/get_kasuwa_bloc.dart';
 import 'package:kasuwa/screens/auth/views/cart_screen.dart';
 
-import '../../../models/cart_item.dart';
+// import '../../../models/cart_item.dart';
 import 'details_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -17,7 +17,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final List<ShoppingCartScreen> cartItems = [];
+  final List<CartItem> cartItems = [];
 
   @override
   Widget build(BuildContext context) {
