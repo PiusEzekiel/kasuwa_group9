@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ForumScreen extends StatefulWidget {
-  ForumScreen({super.key});
+  const ForumScreen({super.key});
 
   @override
   _ForumScreenState createState() => _ForumScreenState();

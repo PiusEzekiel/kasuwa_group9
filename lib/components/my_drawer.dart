@@ -60,7 +60,17 @@ class MyDrawer extends StatelessWidget {
             onTap: () {
               Navigator.pop(context);
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return ForumScreen();
+                return const ForumScreen();
+              }));
+            },
+          ),
+          MyDrawerTile(
+            text: 'C O N T R O L L E',
+            icon: Icons.person_outline,
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return const ProfileScreen();
               }));
             },
           ),

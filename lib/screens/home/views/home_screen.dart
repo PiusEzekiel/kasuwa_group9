@@ -46,7 +46,7 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      drawer: MyDrawer(),
+      drawer: const MyDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: BlocBuilder<GetKasuwaBloc, GetKasuwaState>(

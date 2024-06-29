@@ -162,7 +162,7 @@ class DetailScreen extends StatelessWidget {
                               // ],
                             ),
                             child: Padding(
-                              padding: EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.all(8.0),
                               child: Column(
                                 children: [
                                   // Icon(Icons.shopping_cart,
