@@ -5,6 +5,8 @@ import 'package:kasuwa/screens/home/views/profile_screen.dart';
 
 import '../screens/auth/blocs/sign_in_bloc/sign_in_bloc.dart';
 import '../screens/auth/views/forum_screen.dart';
+import '../screens/auth/views/payment_screen.dart';
+import '../screens/auth/views/cart_screen.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
@@ -66,16 +68,6 @@ class MyDrawer extends StatelessWidget {
               }));
             },
           ),
-          MyDrawerTile(
-            text: 'C O N T R O L L E',
-            icon: Icons.person_outline,
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return const ProfileScreen();
-              }));
-            },
-          ),
 
           //payment
           MyDrawerTile(
@@ -84,7 +76,18 @@ class MyDrawer extends StatelessWidget {
             onTap: () {
               Navigator.pop(context);
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return ForumScreen();
+                return PaymentMethodsScreen();
+              }));
+            },
+          ),
+          //shopping cart
+          MyDrawerTile(
+            text: 'S H O P P I N G  C A R T',
+            icon: Icons.credit_card_outlined,
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return ShoppingCartScreen();
               }));
             },
           ),
