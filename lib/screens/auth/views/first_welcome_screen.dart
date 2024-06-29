@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter/material.dart';
 import 'package:kasuwa/screens/auth/views/welcome_screen.dart';
 
