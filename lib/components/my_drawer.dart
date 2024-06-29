@@ -66,6 +66,18 @@ class MyDrawer extends StatelessWidget {
               }));
             },
           ),
+
+          //payment
+          MyDrawerTile(
+            text: 'P A Y M E N T',
+            icon: Icons.credit_card_outlined,
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return ForumScreen();
+              }));
+            },
+          ),
           //logout
           const Spacer(),
           MyDrawerTile(
