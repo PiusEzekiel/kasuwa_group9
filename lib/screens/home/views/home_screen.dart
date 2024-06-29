@@ -56,8 +56,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   context,
                   MaterialPageRoute(
                     builder: (BuildContext context) => ShoppingCartScreen(
-                        // cartItems: cartItems,
-                        ),
+                      cartItems: cartItems,
+                    ),
                   ));
             },
             icon: const Icon(Icons.shopping_cart, size: 30, color: Colors.red),
