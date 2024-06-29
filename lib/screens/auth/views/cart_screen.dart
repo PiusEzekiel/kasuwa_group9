@@ -1,9 +1,6 @@
 // ignore_for_file: library_private_types_in_public_api, use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
-import 'package:kasuwa_repository/kasuwa_repository.dart';
-
-import '/models/cart_item.dart';
 
 class ShoppingCartScreen extends StatefulWidget {
   @override
@@ -41,17 +38,17 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
           leading: IconButton(
             icon: const Icon(Icons.arrow_back_ios),
             onPressed: () {
-              // Navigate back
+              Navigator.of(context).pop();
             },
           ),
           elevation: 0.0,
-          title: const Center(
+          title: Center(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
                   Icons.shopping_cart,
-                  color: Colors.orange,
+                  color: Theme.of(context).colorScheme.primary,
                   size: 32.0,
                 ),
                 SizedBox(width: 8.0),
@@ -100,7 +97,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.orange,
+                      backgroundColor: Theme.of(context).colorScheme.primary,
                       foregroundColor: Colors.white,
                     ),
                     onPressed: () {},
@@ -162,7 +159,7 @@ class _CartItemWidgetState extends State<CartItemWidget> {
         widget.onDelete();
       },
       background: Container(
-        color: Colors.orange,
+        color: Theme.of(context).colorScheme.primary,
         child: const Align(
           alignment: Alignment.centerRight,
           child: Padding(
@@ -182,11 +179,11 @@ class _CartItemWidgetState extends State<CartItemWidget> {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
         decoration: BoxDecoration(
-          color: Colors.orange[100]!,
+          color: Colors.red,
           border: Border.all(
-            color: Colors.grey[100]!,
-            width: 3.0,
-          ),
+              // color: Theme.of(context).colorScheme.primary,
+              // width: 3.0,
+              ),
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -211,10 +208,10 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                   ),
                   Text(
                     '\rrwf ${(widget.cartItem.price * widget.cartItem.quantity).toStringAsFixed(2)}',
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 16.0,
                       fontWeight: FontWeight.bold,
-                      color: Colors.orange,
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
                 ],
@@ -231,7 +228,10 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                       widget.onQuantityChanged(widget.cartItem.quantity);
                     });
                   },
-                  icon: const Icon(Icons.add, color: Colors.orange),
+                  icon: Icon(
+                    Icons.add,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
                 ),
                 Text(
                   '${widget.cartItem.quantity}',
@@ -248,7 +248,10 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                       }
                     });
                   },
-                  icon: const Icon(Icons.remove, color: Colors.orange),
+                  icon: Icon(
+                    Icons.remove,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
                 ),
               ],
             ),

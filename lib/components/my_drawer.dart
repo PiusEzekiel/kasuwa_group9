@@ -82,8 +82,8 @@ class MyDrawer extends StatelessWidget {
           ),
           //shopping cart
           MyDrawerTile(
-            text: 'S H O P P I N G  C A R T',
-            icon: Icons.credit_card_outlined,
+            text: 'C A R T',
+            icon: Icons.shopping_cart_outlined,
             onTap: () {
               Navigator.pop(context);
               Navigator.push(context, MaterialPageRoute(builder: (context) {
