@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, library_private_types_in_public_api, use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
-// import 'package:learn_basics/pages/card.dart';
+import 'package:kasuwa/screens/auth/views/cart_screen.dart';
 
 void main() {
   runApp(PaymentMethodsScreen());
@@ -20,8 +20,7 @@ class _PaymentMethodsScreenState extends State<PaymentMethodsScreen> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
-        '/payment': (context) => PaymentMethodsScreen(),
-        // '/card': (context) => CreditCardPaymentScreen(),
+        '/card': (context) => ShoppingCartScreen(),
       },
       home: Scaffold(
         appBar: AppBar(
@@ -31,17 +30,9 @@ class _PaymentMethodsScreenState extends State<PaymentMethodsScreen> {
               Navigator.pop(context);
             },
           ),
-          actions: [
-            IconButton(
-              icon: Icon(Icons.menu),
-              onPressed: () {
-                // Open menu
-              },
-            ),
-          ],
         ),
         body: Padding(
-          padding: EdgeInsets.only(left: 50.0, right: 50.0, bottom: 76.0),
+          padding: EdgeInsets.only(left: 50.0, right: 50.0, bottom: 100.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -87,7 +78,6 @@ class _PaymentMethodsScreenState extends State<PaymentMethodsScreen> {
                   ],
                 ),
               ),
-              SizedBox(height: 16.0),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   minimumSize: Size(double.infinity, 48.0),
@@ -106,24 +96,6 @@ class _PaymentMethodsScreenState extends State<PaymentMethodsScreen> {
               ),
             ],
           ),
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          currentIndex: 0,
-          onTap: (index) {},
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home, color: Colors.grey),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_cart, color: Colors.grey),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person, color: Colors.grey),
-              label: '',
-            ),
-          ],
         ),
       ),
     );

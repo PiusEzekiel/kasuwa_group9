@@ -15,7 +15,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final List<CartItem> cartItems = [];
+  final List<ShoppingCartScreen> cartItems = [];
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Navigator.push<void>(
                   context,
                   MaterialPageRoute(
-                    builder: (BuildContext context) => CartScreen(
+                    builder: (BuildContext context) => ShoppingCartScreen(
                       cartItems: cartItems,
                     ),
                   ));
