@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kasuwa/components/my_drawer_tile.dart';
-import 'package:kasuwa/screens/auth/views/profile_screen.dart';
+import 'package:kasuwa/screens/home/views/profile_screen.dart';
 
+import '../screens/auth/blocs/sign_in_bloc/sign_in_bloc.dart';
 import '../screens/auth/views/forum_screen.dart';
 
 class MyDrawer extends StatelessWidget {
@@ -69,7 +71,9 @@ class MyDrawer extends StatelessWidget {
           MyDrawerTile(
             text: 'L O G O U T',
             icon: Icons.logout_outlined,
-            onTap: () {},
+            onTap: () {
+              context.read<SignInBloc>().add(SignOutRequired());
+            },
           ),
           const SizedBox(height: 40.0)
         ],

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../../../components/my_text_field.dart';
+
 class ForumScreen extends StatefulWidget {
-  ForumScreen({super.key});
+  const ForumScreen({super.key});
 
   @override
   _ForumScreenState createState() => _ForumScreenState();
@@ -11,7 +13,7 @@ class _ForumScreenState extends State<ForumScreen> {
   final List<Map<String, dynamic>> messages = [
     {
       'message':
-          'Hey everyone, I\'m new to Family and just wanted to get some advice from the other farmers on here. What has your experience been like selling through the platform so far?',
+          'Hey everyone, I\'m new to Kasuwa and just wanted to get some advice from the other farmers on here. What has your experience been like selling through the platform so far?',
       'sender': 'Tunde',
       'isSender': false,
     },
@@ -57,7 +59,7 @@ class _ForumScreenState extends State<ForumScreen> {
         title: const Text('Forum'),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.only(left: 10, right: 10, bottom: 20),
         child: Column(
           children: [
             Expanded(
@@ -66,7 +68,7 @@ class _ForumScreenState extends State<ForumScreen> {
                 itemBuilder: (context, index) {
                   final message = messages[index];
                   return Padding(
-                    padding: const EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.only(top: 20.0),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: message['isSender']
@@ -97,7 +99,7 @@ class _ForumScreenState extends State<ForumScreen> {
                         Flexible(
                           child: Container(
                             constraints: BoxConstraints(
-                              maxWidth: MediaQuery.of(context).size.width * 0.7,
+                              maxWidth: MediaQuery.of(context).size.width * 0.9,
                             ),
                             padding: const EdgeInsets.all(12.0),
                             decoration: BoxDecoration(
@@ -117,7 +119,7 @@ class _ForumScreenState extends State<ForumScreen> {
                             child: Text(
                               message['message'],
                               style: TextStyle(
-                                  fontSize: 20,
+                                  fontSize: 16,
                                   fontWeight: FontWeight.w600,
                                   color: Colors.grey[700]),
                             ),
@@ -153,19 +155,51 @@ class _ForumScreenState extends State<ForumScreen> {
             Row(
               children: [
                 Expanded(
-                  child: TextField(
-                    controller: _messageController,
-                    decoration: const InputDecoration(
-                      hintText: 'Enter your message',
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                ),
+                    child: MyTextField(
+                        controller: _messageController,
+                        hintText: 'Send chat...',
+                        obscureText: false,
+                        keyboardType: TextInputType.text,
+                        validator: (val) {
+                          if (val!.isEmpty) {
+                            return 'Please fill in this field';
+                          }
+                          return null;
+                        })),
                 const SizedBox(width: 16),
-                ElevatedButton(
-                  onPressed: _sendMessage,
-                  child: const Text('Send'),
-                ),
+                // ElevatedButton(
+                //   onPressed: _sendMessage,
+                //   child: const Text('Send'),
+                // ),
+
+                IconButton(
+                    onPressed: _sendMessage,
+                    icon: Icon(
+                      Icons.send,
+                      color: Theme.of(context).colorScheme.primary,
+                      size: 30,
+                    )),
+                // SizedBox(
+                //   height: 55,
+                //   child: ElevatedButton(
+                //     onPressed: _sendMessage,
+                //     style: TextButton.styleFrom(
+                //       elevation: 3.0,
+                //       backgroundColor: Theme.of(context).colorScheme.primary,
+                //       shape: RoundedRectangleBorder(
+                //         borderRadius: BorderRadius.circular(20),
+                //       ),
+                //     ),
+                //     child: const Text(
+                //       'Send',
+                //       style: TextStyle(
+                //         color: Colors.white,
+                //         fontWeight: FontWeight.bold,
+                //         fontSize: 15,
+                //       ),
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           ],

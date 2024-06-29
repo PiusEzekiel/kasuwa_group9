@@ -97,13 +97,13 @@ class FirstWelcomeScreen extends StatelessWidget {
                           height: 50,
                           child: TextButton(
                             onPressed: () {
-                              Navigator.pop(context);
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const WelcomeScreen()));
-                              // Navigator.of(context).pop();
+                              // Navigator.pop(context);
+                              // Navigator.push(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //         builder: (context) =>
+                              //             const WelcomeScreen()));
+                              Navigator.of(context).pop();
                             },
                             style: TextButton.styleFrom(
                               elevation: 3.0,
