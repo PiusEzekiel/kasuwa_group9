@@ -1,12 +1,8 @@
-// ignore_for_file: unused_import
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kasuwa/components/my_drawer.dart';
 import 'package:kasuwa/screens/home/blocs/get_kasuwa_bloc/get_kasuwa_bloc.dart';
 import 'package:kasuwa/screens/auth/views/cart_screen.dart';
-
-// import '../../../models/cart_item.dart';
 import 'details_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -17,6 +13,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final UserRepository _userRepository = UserRepository();
   final List<CartItem> cartItems = [];
 
   @override
@@ -58,7 +55,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     builder: (BuildContext context) => ShoppingCartScreen(),
                   ));
             },
-            icon: const Icon(Icons.shopping_cart, size: 30, color: Colors.red),
+            icon: Icon(Icons.shopping_cart,
+                size: 30, color: Theme.of(context).colorScheme.primary),
           ),
           // IconButton(
           //   onPressed: () {
@@ -68,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
           // ),
         ],
       ),
-      drawer: const MyDrawer(),
+      drawer: MyDrawer(userRepository: _userRepository),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: BlocBuilder<GetKasuwaBloc, GetKasuwaState>(
@@ -173,7 +171,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   style: const TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 14,
+                                    fontSize: 18,
                                   )),
                             ),
                             Padding(
@@ -187,7 +185,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   style: const TextStyle(
                                     color: Colors.grey,
                                     fontWeight: FontWeight.w600,
-                                    fontSize: 10,
+                                    fontSize: 13,
                                   )),
                             ),
                             Padding(
@@ -216,7 +214,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     .colorScheme
                                                     .primary,
                                                 fontWeight: FontWeight.w700,
-                                                fontSize: 14,
+                                                fontSize: 16,
                                               )),
                                           // const SizedBox(
                                           //   height: 2,

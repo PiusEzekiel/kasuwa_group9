@@ -177,7 +177,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
 class WelcomeDialog extends StatelessWidget {
   final BuildContext context;
 
-  const WelcomeDialog({required this.context});
+  const WelcomeDialog({super.key, required this.context});
 
   @override
   Widget build(BuildContext context) {

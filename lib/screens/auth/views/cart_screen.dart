@@ -1,6 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api, use_key_in_widget_constructors, unused_import
 
 import 'package:flutter/material.dart';
+import 'package:kasuwa/screens/auth/views/payment_screen.dart';
 
 class ShoppingCartScreen extends StatefulWidget {
   @override
@@ -31,82 +32,88 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-          elevation: 0.0,
-          title: Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.shopping_cart,
-                  color: Theme.of(context).colorScheme.primary,
-                  size: 32.0,
-                ),
-                SizedBox(width: 8.0),
-                Text('Shopping Cart'),
-              ],
-            ),
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+        elevation: 0.0,
+        title: Center(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Expanded(
-                child: ListView.builder(
-                  itemCount: cartItems.length,
-                  itemBuilder: (context, index) {
-                    return CartItemWidget(
-                      cartItem: cartItems[index],
-                      onDelete: () {
-                        setState(() {
-                          cartItems.removeAt(index);
-                        });
-                      },
-                      onQuantityChanged: (newQuantity) {
-                        setState(() {
-                          cartItems[index].quantity = newQuantity;
-                        });
-                      },
-                    );
-                  },
-                ),
+              Icon(
+                Icons.shopping_cart_outlined,
+                color: Theme.of(context).colorScheme.primary,
+                size: 28.0,
               ),
-              const SizedBox(height: 16.0),
-              const Divider(),
-              const SizedBox(height: 16.0),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Total: \rrwf ${getTotalPrice().toStringAsFixed(2)}',
-                    style: const TextStyle(
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Theme.of(context).colorScheme.primary,
-                      foregroundColor: Colors.white,
-                    ),
-                    onPressed: () {},
-                    child: const Text('Checkout'),
-                  ),
-                ],
-              ),
+              const SizedBox(width: 8.0),
+              Text('Shopping Cart',
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.primary,
+                    fontSize: 24.0,
+                  )),
             ],
           ),
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: ListView.builder(
+                itemCount: cartItems.length,
+                itemBuilder: (context, index) {
+                  return CartItemWidget(
+                    cartItem: cartItems[index],
+                    onDelete: () {
+                      setState(() {
+                        cartItems.removeAt(index);
+                      });
+                    },
+                    onQuantityChanged: (newQuantity) {
+                      setState(() {
+                        cartItems[index].quantity = newQuantity;
+                      });
+                    },
+                  );
+                },
+              ),
+            ),
+            const SizedBox(height: 16.0),
+            const Divider(),
+            const SizedBox(height: 16.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Total: \rrwf ${getTotalPrice().toStringAsFixed(2)}',
+                  style: const TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Theme.of(context).colorScheme.primary,
+                    foregroundColor: Colors.white,
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => PaymentMethodsScreen()));
+                  },
+                  child: const Text('Checkout'),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );
@@ -179,11 +186,11 @@ class _CartItemWidgetState extends State<CartItemWidget> {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
         decoration: BoxDecoration(
-          color: Colors.red,
+          // color: Theme.of(context).colorScheme.tertiary.withOpacity(0.3),
           border: Border.all(
-              // color: Theme.of(context).colorScheme.primary,
-              // width: 3.0,
-              ),
+            color: Theme.of(context).colorScheme.primary,
+            // width: 3.0,
+          ),
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,

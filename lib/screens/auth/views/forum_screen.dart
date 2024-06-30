@@ -56,7 +56,19 @@ class _ForumScreenState extends State<ForumScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Forum'),
+        title: Flexible(
+            child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.forum_outlined,
+                color: Theme.of(context).colorScheme.primary, size: 28.0),
+            const SizedBox(width: 8.0),
+            Text('Forum',
+                style: TextStyle(
+                    color: Theme.of(context).colorScheme.primary,
+                    fontSize: 24.0)),
+          ],
+        )),
       ),
       body: Padding(
         padding: const EdgeInsets.only(left: 10, right: 10, bottom: 20),
@@ -179,27 +191,6 @@ class _ForumScreenState extends State<ForumScreen> {
                       color: Theme.of(context).colorScheme.primary,
                       size: 30,
                     )),
-                // SizedBox(
-                //   height: 55,
-                //   child: ElevatedButton(
-                //     onPressed: _sendMessage,
-                //     style: TextButton.styleFrom(
-                //       elevation: 3.0,
-                //       backgroundColor: Theme.of(context).colorScheme.primary,
-                //       shape: RoundedRectangleBorder(
-                //         borderRadius: BorderRadius.circular(20),
-                //       ),
-                //     ),
-                //     child: const Text(
-                //       'Send',
-                //       style: TextStyle(
-                //         color: Colors.white,
-                //         fontWeight: FontWeight.bold,
-                //         fontSize: 15,
-                //       ),
-                //     ),
-                //   ),
-                // ),
               ],
             ),
           ],
