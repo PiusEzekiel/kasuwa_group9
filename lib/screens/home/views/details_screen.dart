@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:kasuwa/blocs/cart_bloc/bloc/cart_bloc.dart';
+// import 'package:kasuwa/screens/cart/views/cart_screen.dart';
 import 'package:kasuwa_repository/kasuwa_repository.dart';
+import 'package:provider/provider.dart';
 
-import '../../../models/cart_item.dart';
-import 'package:collection/collection.dart'; // Import the collection package
+import '../../cart/models/cart_item.dart';
+// import 'package:collection/collection.dart'; // Import the collection package
 
 class DetailScreen extends StatefulWidget {
   final Kasuwa kasuwa;
@@ -13,7 +16,7 @@ class DetailScreen extends StatefulWidget {
 }
 
 class _DetailScreenState extends State<DetailScreen> {
-  final List<CartItem> cartItems = [];
+  // ... (No need for cartItems list here)
 
   @override
   Widget build(BuildContext context) {
@@ -133,8 +136,38 @@ class _DetailScreenState extends State<DetailScreen> {
                       height: 50,
                       child: TextButton(
                         onPressed: () {
-                          _addToCart(
-                              widget.kasuwa); // Call the _addToCart function
+                          // Add to cart using BLoC
+                          context.read<CartBloc>().add(
+                                AddToCartEvent(
+                                  cartItem: CartItem(
+                                    kasuwaId: widget.kasuwa.kasuwaId,
+                                    name: widget.kasuwa.name,
+                                    discount: widget.kasuwa.price -
+                                        (widget.kasuwa.price *
+                                            (widget.kasuwa.discount / 100)),
+                                    // price: widget.kasuwa.price,
+                                    quantity: 1,
+                                    imageUrl: widget.kasuwa.picture,
+                                  ),
+                                ),
+                              );
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Center(
+                                child: Text(
+                                  '${widget.kasuwa.name} added to cart!',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color:
+                                        Theme.of(context).colorScheme.onPrimary,
+                                  ),
+                                ),
+                              ),
+                              duration: const Duration(seconds: 2),
+                              backgroundColor:
+                                  Theme.of(context).colorScheme.primary,
+                            ),
+                          );
                         },
                         style: TextButton.styleFrom(
                           elevation: 3.0,
@@ -162,55 +195,5 @@ class _DetailScreenState extends State<DetailScreen> {
         ),
       ),
     );
-  }
-
-  // Add to Cart Logic
-  void _addToCart(Kasuwa kasuwa) {
-    setState(() {
-      // Find existing item in the cart
-      CartItem? existingItem = cartItems.firstWhereOrNull(
-        (item) => item.kasuwa == kasuwa,
-      );
-
-      if (existingItem != null) {
-        // Increase quantity of existing item
-        existingItem.quantity++;
-      } else {
-        // Add new item to the cart
-        cartItems.add(CartItem(kasuwa: kasuwa, quantity: 1));
-      }
-    });
-  }
-
-  // Remove from Cart Logic
-  void _removeFromCart(Kasuwa kasuwa) {
-    setState(() {
-      cartItems.removeWhere((item) => item.kasuwa == kasuwa);
-    });
-  }
-
-  // Get Total Price
-  double get totalPrice {
-    double total = 0;
-    for (CartItem cartItem in cartItems) {
-      total += cartItem.totalPrice;
-    }
-    return total;
-  }
-
-  // Get Total Quantity
-  int get totalQuantity {
-    int total = 0;
-    for (CartItem cartItem in cartItems) {
-      total += cartItem.quantity;
-    }
-    return total;
-  }
-
-  // Clear Cart Logic
-  void _clearCart() {
-    setState(() {
-      cartItems.clear();
-    });
   }
 }

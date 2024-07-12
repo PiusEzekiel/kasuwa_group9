@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kasuwa/blocs/cart_bloc/bloc/cart_bloc.dart';
 import 'package:kasuwa/components/my_drawer.dart';
+import 'package:kasuwa/screens/cart/models/cart_item.dart';
 import 'package:kasuwa/screens/home/blocs/get_kasuwa_bloc/get_kasuwa_bloc.dart';
-import 'package:kasuwa/screens/auth/views/cart_screen.dart';
+import 'package:kasuwa/screens/cart/views/cart_screen.dart';
+import 'package:provider/provider.dart';
+// import '../../cart/models/cart_item.dart';
 import 'details_screen.dart';
+import 'package:kasuwa_repository/kasuwa_repository.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  // final Kasuwa kasuwa;
+  final List<Kasuwa> kasuwas; // Now it accepts a list
+  const HomeScreen({required this.kasuwas, Key? key}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -14,7 +21,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final UserRepository _userRepository = UserRepository();
-  final List<CartItem> cartItems = [];
+  // final List<CartItem> cartItems = [];
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +30,6 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.surface,
         title: Flexible(
-          // padding: const EdgeInsets.only(left: 55.0, right: 50.0),
           child: Center(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -35,13 +41,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(
                   width: 1,
                 ),
-                // const Text(
-                //   'asuwa',
-                //   style: TextStyle(
-                //     fontWeight: FontWeight.w900,
-                //     fontSize: 25,
-                //   ),
-                // ),
               ],
             ),
           ),
@@ -52,18 +51,12 @@ class _HomeScreenState extends State<HomeScreen> {
               Navigator.push<void>(
                   context,
                   MaterialPageRoute(
-                    builder: (BuildContext context) => ShoppingCartScreen(),
+                    builder: (BuildContext context) => const CartScreen(),
                   ));
             },
             icon: Icon(Icons.shopping_cart,
                 size: 30, color: Theme.of(context).colorScheme.primary),
           ),
-          // IconButton(
-          //   onPressed: () {
-          //     context.read<SignInBloc>().add(SignOutRequired());
-          //   },
-          //   icon: const Icon(Icons.logout_outlined),
-          // ),
         ],
       ),
       drawer: MyDrawer(userRepository: _userRepository),
@@ -85,6 +78,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   // state.kasuwas.length, to return all items on the list on firebase
                   itemCount: state.kasuwas.length,
                   itemBuilder: (context, int i) {
+                    final kasuwa = state.kasuwas[i]; // Get the current Kasuwa
+
                     return Material(
                       elevation: 3,
                       color: Colors.white,
@@ -97,69 +92,23 @@ class _HomeScreenState extends State<HomeScreen> {
                               context,
                               MaterialPageRoute<void>(
                                 builder: (BuildContext context) => DetailScreen(
-                                  state.kasuwas[i],
+                                  kasuwa,
                                 ),
                               ));
                         },
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Image.network(
-                              state.kasuwas[i].picture,
-                              // scale: 10,
+                            ClipRRect(
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(20),
+                                topRight: Radius.circular(20),
+                              ), // Only top corners rounde
+                              child: Image.network(
+                                kasuwa.picture,
+                                // scale: 10,
+                              ),
                             ),
-                            // Padding(
-                            //   padding: const EdgeInsets.symmetric(
-                            //     horizontal: 12,
-                            //     vertical: 4,
-                            //   ),
-                            //   child: Row(
-                            //     children: [
-                            //       Container(
-                            //         decoration: BoxDecoration(
-                            //           color: Colors.red,
-                            //           borderRadius: BorderRadius.circular(10),
-                            //         ),
-                            //         child: const Padding(
-                            //           padding: EdgeInsets.symmetric(
-                            //               horizontal: 6, vertical: 3),
-                            //           child: Text(
-                            //             '10',
-                            //             style: TextStyle(
-                            //               color: Colors.white,
-                            //               fontWeight: FontWeight.bold,
-                            //               fontSize: 8,
-                            //             ),
-                            //           ),
-                            //         ),
-                            //       ),
-                            //       const SizedBox(
-                            //         width: 8,
-                            //       ),
-                            //       Container(
-                            //         decoration: BoxDecoration(
-                            //           color: Colors.green.withOpacity(0.6),
-                            //           borderRadius: BorderRadius.circular(10),
-                            //         ),
-                            //         child: const Padding(
-                            //           padding: EdgeInsets.symmetric(
-                            //               horizontal: 6, vertical: 3),
-                            //           child: Text(
-                            //             '10',
-                            //             style: TextStyle(
-                            //               color: Colors.white,
-                            //               fontWeight: FontWeight.bold,
-                            //               fontSize: 8,
-                            //             ),
-                            //           ),
-                            //         ),
-                            //       ),
-                            //     ],
-                            //   ),
-                            // ),
-                            // const SizedBox(
-                            //   height: 6,
-                            // ),
                             Padding(
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 12,
@@ -167,7 +116,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
 
                               //name of the product
-                              child: Text(state.kasuwas[i].name,
+                              child: Text(kasuwa.name,
                                   style: const TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold,
@@ -181,7 +130,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
 
                               //description of the product
-                              child: Text(state.kasuwas[i].description,
+                              child: Text(kasuwa.description,
                                   style: const TextStyle(
                                     color: Colors.grey,
                                     fontWeight: FontWeight.w600,
@@ -208,7 +157,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         children: [
                                           //price of the product
                                           Text(
-                                              "RWF ${state.kasuwas[i].price - (state.kasuwas[i].price * (state.kasuwas[i].discount / 100))}0",
+                                              "RWF ${kasuwa.price - (kasuwa.price * (kasuwa.discount / 100))}0",
                                               style: TextStyle(
                                                 color: Theme.of(context)
                                                     .colorScheme
@@ -220,7 +169,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           //   height: 2,
                                           // ),
                                           Text(
-                                            "RWF ${state.kasuwas[i].price}.00",
+                                            "RWF ${kasuwa.price}.00",
                                             style: const TextStyle(
                                               color: Colors.grey,
                                               fontWeight: FontWeight.w700,
@@ -234,7 +183,48 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                   ),
                                   IconButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      // Get the CartBloc instance from the context
+                                      final cartBloc = context.read<CartBloc>();
+
+                                      // Create a CartItem instance
+                                      final cartItem = CartItem(
+                                        kasuwaId: kasuwa.kasuwaId,
+                                        name: kasuwa.name,
+                                        discount: kasuwa.price -
+                                            (kasuwa.price *
+                                                (kasuwa.discount / 100)),
+                                        // price: kasuwa.price,
+                                        quantity: 1,
+                                        imageUrl: kasuwa.picture,
+                                      );
+
+                                      // Add the item to the cart using the CartBloc
+                                      cartBloc.add(
+                                          AddToCartEvent(cartItem: cartItem));
+
+                                      // Show the snackbar
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                          content: Center(
+                                            child: Text(
+                                              '${kasuwa.name} added to cart!',
+                                              style: TextStyle(
+                                                fontSize: 16,
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onPrimary,
+                                              ),
+                                            ),
+                                          ),
+                                          duration: const Duration(seconds: 2),
+                                          backgroundColor: Theme.of(context)
+                                              .colorScheme
+                                              .primary,
+                                        ),
+                                      );
+                                    },
                                     icon: const Icon(
                                       Icons.add_circle_outline_sharp,
                                       size: 35,

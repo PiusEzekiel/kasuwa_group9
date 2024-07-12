@@ -13,9 +13,9 @@ class GetKasuwaBloc extends Bloc<GetKasuwaEvent, GetKasuwaState> {
       emit(GetKasuwaLoading());
       try {
         List<Kasuwa> kasuwas = await _kasuwaRepo.getKasuwas();
-        emit(GetKasuwaSuccess(kasuwas));
+        emit(GetKasuwaSuccess(kasuwas: kasuwas));
       } catch (e) {
-        emit(GetKasuwaFailure());
+        emit(GetKasuwaFailure(errorMessage: e.toString()));
       }
     });
   }

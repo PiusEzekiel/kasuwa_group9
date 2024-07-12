@@ -6,14 +6,14 @@ import 'package:kasuwa/screens/home/views/profile_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart'; // Import for Firebase Auth
 
 import '../screens/auth/blocs/sign_in_bloc/sign_in_bloc.dart';
-import '../screens/auth/views/forum_screen.dart';
-import '../screens/auth/views/payment_screen.dart';
-import '../screens/auth/views/cart_screen.dart';
+import '../screens/home/views/forum_screen.dart';
+import '../screens/cart/views/payment_screen.dart';
+import '../screens/cart/views/cart_screen.dart';
 
 class MyDrawer extends StatefulWidget {
   final UserRepository userRepository;
 
-  MyDrawer({required this.userRepository});
+  const MyDrawer({super.key, required this.userRepository});
 
   @override
   State<MyDrawer> createState() => _MyDrawerState();
@@ -59,9 +59,9 @@ class _MyDrawerState extends State<MyDrawer> {
                       ),
                     );
                   } else if (snapshot.hasError) {
-                    return Text('Error fetching username');
+                    return const Text('Error fetching username');
                   } else {
-                    return CircularProgressIndicator();
+                    return const CircularProgressIndicator();
                   }
                 },
               ),
@@ -105,15 +105,17 @@ class _MyDrawerState extends State<MyDrawer> {
                   }));
                 },
               ),
-              //shopping cart
+              // shopping cart
               MyDrawerTile(
                 text: 'C A R T',
                 icon: Icons.shopping_cart_outlined,
                 onTap: () {
                   Navigator.pop(context);
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return ShoppingCartScreen();
-                  }));
+                  Navigator.push<void>(
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => const CartScreen(),
+                      ));
                 },
               ),
 

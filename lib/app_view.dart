@@ -2,13 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kasuwa/blocs/authentication_bloc/authentication_bloc.dart';
 import 'package:kasuwa/screens/auth/blocs/sign_in_bloc/sign_in_bloc.dart';
-
 import 'package:kasuwa/screens/home/blocs/get_kasuwa_bloc/get_kasuwa_bloc.dart';
 import 'package:kasuwa_repository/kasuwa_repository.dart';
-
-// import 'screens/auth/views/welcome_screen.dart';
 import 'screens/auth/views/welcome_screen.dart';
-// import 'screens/auth/views/first_welcome_screen.dart';
 import 'screens/home/views/home_screen.dart';
 
 class MyAppView extends StatelessWidget {
@@ -26,6 +22,7 @@ class MyAppView extends StatelessWidget {
             primary: Colors.orange.shade800,
             onPrimary: Colors.white,
             tertiary: Colors.blue.shade200,
+            secondary: Colors.blue.shade500,
             onTertiary: Colors.white,
           ),
         ),
@@ -44,17 +41,19 @@ class MyAppView extends StatelessWidget {
                     )..add(GetKasuwa()),
                   ),
                 ],
-                child: const HomeScreen(),
+                child: BlocBuilder<GetKasuwaBloc, GetKasuwaState>(
+                  builder: (context, kasuwaState) {
+                    if (kasuwaState is GetKasuwaSuccess) {
+                      return HomeScreen(
+                          kasuwas: kasuwaState.kasuwa); // Pass the list
+                    } else {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+                  },
+                ),
               );
-            }
-            // else if (state.status == AuthenticationStatus.unauthenticated) {
-            //   //
-            //   return const FirstWelcomeScreen();
-            //   // return const WelcomeScreen();
-            // }
-            else {
+            } else {
               return const WelcomeScreen();
-              // return const FirstWelcomeScreen();
             }
           }),
         ));

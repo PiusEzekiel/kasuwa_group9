@@ -17,8 +17,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   //implementing fetch user profile
   late User? _user;
   String? _userName; //To store the user name
-  bool _isLoading =
-      false; //Flag for loading state while user wants to edit profile
+  String? _email; //To store the user email
+  // bool _isLoading =
+  //     false; //Flag for loading state while user wants to edit profile
   File? _selectedImage;
   String? _imageUrl; // To store the URL of the uploaded image
 
@@ -143,6 +144,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 },
                               ),
                             ),
+                            const SizedBox(height: 10),
+                            Text(
+                              "Your email: $_email",
+                              style: TextStyle(
+                                  color:
+                                      Theme.of(context).colorScheme.tertiary),
+                            )
                           ],
                         ),
                         actions: [
@@ -191,6 +199,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             final userDoc = snapshot.data!;
             if (userDoc.exists) {
               _userName = userDoc.get('name') as String?;
+              _email = userDoc.get('email') as String?;
               // Check if the field exists before accessing it
               if (userDoc.data() != null &&
                   (userDoc.data() as Map).containsKey('profileImageUrl')) {
