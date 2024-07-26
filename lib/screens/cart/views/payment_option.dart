@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, library_private_types_in_public_api, use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
+import 'package:kasuwa/screens/cart/views/credit_card.dart';
 
 // void main() {
 //   runApp(PaymentMethodsScreen());
@@ -18,34 +19,47 @@ class _PaymentMethodsScreenState extends State<PaymentMethodsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // Icon(
+            //   Icons.forum_outlined,
+            //   color: Theme.of(context).colorScheme.primary,
+            //   size: 28.0,
+            // ),
+            // const SizedBox(width: 8.0),
+            Text(
+              'Payment Methods          ',
+              style: TextStyle(
+                  color: Theme.of(context).colorScheme.primary, fontSize: 24.0),
+            ),
+          ],
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.only(left: 50.0, right: 50.0, bottom: 100.0),
+        padding:
+            EdgeInsets.only(left: 50.0, right: 50.0, bottom: 40.0, top: 70),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              'Payment Methods',
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 24.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 8.0),
+            // Text(
+            //   'Payment Methods',
+            //   style: TextStyle(
+            //     color: Theme.of(context).colorScheme.primary,
+            //     fontSize: 24.0,
+            //     fontWeight: FontWeight.bold,
+            //   ),
+            // ),
+            // SizedBox(height: 40.0),
             Text(
               'Select your preferred payment method:',
               style: TextStyle(
-                fontSize: 16.0,
+                fontSize: 20.0,
+                color: Theme.of(context).colorScheme.tertiary,
               ),
+              textAlign: TextAlign.center,
             ),
-            SizedBox(height: 16.0),
+            SizedBox(height: 25.0),
             Expanded(
               child: ListView(
                 children: [
@@ -74,7 +88,7 @@ class _PaymentMethodsScreenState extends State<PaymentMethodsScreen> {
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                minimumSize: Size(double.infinity, 48.0),
+                fixedSize: Size(300, 50),
                 backgroundColor: Theme.of(context).colorScheme.primary,
                 foregroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
@@ -84,9 +98,15 @@ class _PaymentMethodsScreenState extends State<PaymentMethodsScreen> {
               onPressed: _selectedPaymentMethod == -1
                   ? null
                   : () {
-                      Navigator.pushNamed(context, '/card');
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return CreditCard();
+                      }));
                     },
-              child: Text('Next'),
+              child: Text(
+                'Next',
+                style: TextStyle(fontSize: 18),
+              ),
             ),
           ],
         ),
@@ -102,7 +122,9 @@ class _PaymentMethodsScreenState extends State<PaymentMethodsScreen> {
         });
       },
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 12.0),
+        padding: EdgeInsets.symmetric(
+          vertical: 15.0,
+        ),
         child: Row(
           children: [
             Radio(
@@ -113,6 +135,8 @@ class _PaymentMethodsScreenState extends State<PaymentMethodsScreen> {
                   _selectedPaymentMethod = value!;
                 });
               },
+              activeColor: Theme.of(context).colorScheme.primary,
+              // fillColor: Theme.of(context).colorScheme.primary,
             ),
             SizedBox(width: 16.0),
             Image.asset(
@@ -122,7 +146,12 @@ class _PaymentMethodsScreenState extends State<PaymentMethodsScreen> {
             ),
             SizedBox(width: 20.0),
             Expanded(
-              child: Text(title),
+              child: Text(
+                title,
+                style: TextStyle(
+                    fontSize: 18.0,
+                    color: Theme.of(context).colorScheme.tertiary),
+              ),
             ),
           ],
         ),

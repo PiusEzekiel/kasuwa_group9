@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kasuwa/blocs/cart_bloc/bloc/cart_bloc.dart';
 import 'package:kasuwa/screens/cart/models/cart_item.dart';
-import 'package:kasuwa/screens/cart/views/payment_screen.dart';
+import 'package:kasuwa/screens/cart/views/payment_option.dart';
 import 'package:provider/provider.dart'; // Import provider
 
 class CartScreen extends StatefulWidget {
@@ -53,23 +53,24 @@ class _CartScreenState extends State<CartScreen> {
       body: Consumer<CartBloc>(
         builder: (context, cartBloc, child) {
           if (cartBloc.state is CartLoaded) {
-            final cartItems = (cartBloc.state as CartLoaded).cartItems;
-            if (cartBloc.state.cartItems.isEmpty) {
+            final cartState = cartBloc.state as CartLoaded;
+            if (cartState.cartItems.isEmpty) {
               return const Center(child: Text("Cart is empty"));
             }
             return Column(
               children: [
                 Expanded(
                   child: ListView.builder(
-                    itemCount: cartBloc.state.cartItems.length,
+                    itemCount: cartState.cartItems.length,
                     itemBuilder: (context, index) {
-                      final item = cartBloc.state.cartItems[index];
+                      final item = cartState.cartItems[index];
                       return CartItemWidget(cartItem: item);
                     },
                   ),
                 ),
                 Container(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.only(
+                      bottom: 40.0, top: 20, right: 25, left: 25),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -82,7 +83,7 @@ class _CartScreenState extends State<CartScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Total: RWF ${getTotalPrice(cartBloc.state.cartItems).toStringAsFixed(2)}',
+                            'Total: RWF ${cartState.totalPrice.toStringAsFixed(2)}',
                             style: const TextStyle(
                               fontSize: 18.0,
                               fontWeight: FontWeight.bold,
@@ -120,14 +121,6 @@ class _CartScreenState extends State<CartScreen> {
       ),
     );
   }
-
-  double getTotalPrice(List<CartItem> cartItems) {
-    double total = 0.0;
-    for (var item in cartItems) {
-      total += item.getTotalPrice();
-    }
-    return total;
-  }
 }
 
 class CartItemWidget extends StatefulWidget {
@@ -148,7 +141,7 @@ class _CartItemWidgetState extends State<CartItemWidget> {
           // height: MediaQuery.of(context).size.height * 0.80, // 80% of Screen
           child: Padding(
             padding: const EdgeInsets.only(
-                top: 8.0, right: 10.0, left: 10.0, bottom: 0.0),
+                top: 8.0, right: 15.0, left: 15.0, bottom: 0.0),
             child: Card(
               child: Padding(
                 padding:

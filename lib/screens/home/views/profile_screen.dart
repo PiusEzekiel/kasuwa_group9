@@ -6,6 +6,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
+import '../../cart/views/order_history.dart';
+
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
@@ -23,10 +25,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
   File? _selectedImage;
   String? _imageUrl; // To store the URL of the uploaded image
 
+  // Cart related variables
+  int _cartItemCount = 0; // Initialize with 0
+
   @override
   void initState() {
     super.initState();
     _user = FirebaseAuth.instance.currentUser;
+    _fetchCartCount(); // Fetch the cart count on initialization
   }
 
   // Function to pick an image from the gallery
@@ -78,12 +84,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
 //Function to update user profile ends
 
+  // Function to fetch the cart count from Firestore
+  Future<void> _fetchCartCount() async {
+    final userId = _user!.uid;
+    final cartDoc = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userId)
+        .collection('cart')
+        .get();
+    setState(() {
+      _cartItemCount = cartDoc.docs.length;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Flexible(
-            child: Row(
+        title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
@@ -97,7 +115,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     color: Theme.of(context).colorScheme.primary,
                     fontSize: 24.0)),
           ],
-        )),
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.edit),
@@ -232,21 +250,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     Text(
                       'Hi, $_userName',
                       style: TextStyle(
-                        fontSize: 24.0,
+                        fontSize: 18.0,
                         fontWeight: FontWeight.w400,
                         color: Theme.of(context).colorScheme.primary,
                       ),
                     ),
-
-                    // Text(
-                    //   'Name',
-                    //   style: TextStyle(
-                    //     fontSize: 24.0,
-                    //     fontWeight: FontWeight.w400,
-                    //     color: Theme.of(context).colorScheme.primary,
-                    //   ),
-                    // ),
-                    const SizedBox(height: 8.0),
+                    // const SizedBox(height: 8.0),
                     Divider(
                       color: Theme.of(context).colorScheme.tertiary,
                       thickness: 2,
@@ -264,8 +273,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               color: Theme.of(context).colorScheme.tertiary,
                             ),
                             const SizedBox(width: 8.0),
-                            const Text('Cart: 3',
-                                style: TextStyle(fontSize: 18)),
+                            Text(
+                              'Cart: $_cartItemCount', // Display cart item count
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  color:
+                                      Theme.of(context).colorScheme.tertiary),
+                            ),
                           ],
                         ),
                         Row(
@@ -276,8 +290,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               color: Colors.red.shade600,
                             ),
                             const SizedBox(width: 8.0),
-                            const Text('Likes: 7',
-                                style: TextStyle(fontSize: 18)),
+                            Text('Likes: 7',
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .tertiary)),
                           ],
                         ),
                       ],
@@ -291,13 +309,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           color: Theme.of(context).colorScheme.tertiary,
                         ),
                         const SizedBox(width: 8.0),
-                        const Text('Saved Card:',
-                            style: TextStyle(fontSize: 18.0)),
+                        Text('Saved Card:',
+                            style: TextStyle(
+                                fontSize: 18.0,
+                                color: Theme.of(context).colorScheme.tertiary)),
                         const Spacer(),
-                        const Text('474 xxxx xxx xxx',
-                            style: TextStyle(fontSize: 18.0)),
+                        Text('474 xxxx xxx xxx',
+                            style: TextStyle(
+                                fontSize: 18.0,
+                                color: Theme.of(context).colorScheme.tertiary)),
                       ],
                     ),
+
                     const SizedBox(height: 25.0),
                     Row(
                       children: [
@@ -307,8 +330,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           color: Theme.of(context).colorScheme.tertiary,
                         ),
                         const SizedBox(width: 8.0),
-                        const Text('Receive messages',
-                            style: TextStyle(fontSize: 18.0)),
+                        Text('Receive messages',
+                            style: TextStyle(
+                                fontSize: 18.0,
+                                color: Theme.of(context).colorScheme.tertiary)),
                         const Spacer(),
                         const Icon(
                           Icons.check_circle,
@@ -325,14 +350,42 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           color: Theme.of(context).colorScheme.tertiary,
                         ),
                         const SizedBox(width: 8.0),
-                        const Text('Notifications',
-                            style: TextStyle(fontSize: 18.0)),
+                        Text('Notifications',
+                            style: TextStyle(
+                                fontSize: 18.0,
+                                color: Theme.of(context).colorScheme.tertiary)),
                         const Spacer(),
                         const Icon(
                           Icons.check_circle,
                           color: Colors.green,
                         ),
                       ],
+                    ),
+                    const SizedBox(height: 25.0),
+                    // Spacer(),
+                    InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                        Navigator.push<void>(context,
+                            MaterialPageRoute(builder: (context) {
+                          return const OrderHistoryScreen(); // Use const here
+                        }));
+                      },
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.receipt_long,
+                            size: 30,
+                            color: Theme.of(context).colorScheme.tertiary,
+                          ),
+                          const SizedBox(width: 8.0),
+                          Text('View All Orders',
+                              style: TextStyle(
+                                  fontSize: 18.0,
+                                  color:
+                                      Theme.of(context).colorScheme.tertiary)),
+                        ],
+                      ),
                     ),
                   ],
                 ),

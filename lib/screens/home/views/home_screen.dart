@@ -5,6 +5,7 @@ import 'package:kasuwa/components/my_drawer.dart';
 import 'package:kasuwa/screens/cart/models/cart_item.dart';
 import 'package:kasuwa/screens/home/blocs/get_kasuwa_bloc/get_kasuwa_bloc.dart';
 import 'package:kasuwa/screens/cart/views/cart_screen.dart';
+import 'package:kasuwa/screens/home/views/home_appbar.dart';
 import 'package:provider/provider.dart';
 // import '../../cart/models/cart_item.dart';
 import 'details_screen.dart';
@@ -27,38 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.surface,
-        title: Flexible(
-          child: Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  'images/kasuwa_logo.png',
-                  scale: 10,
-                ),
-                const SizedBox(
-                  width: 1,
-                ),
-              ],
-            ),
-          ),
-        ),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.push<void>(
-                  context,
-                  MaterialPageRoute(
-                    builder: (BuildContext context) => const CartScreen(),
-                  ));
-            },
-            icon: Icon(Icons.shopping_cart,
-                size: 30, color: Theme.of(context).colorScheme.primary),
-          ),
-        ],
-      ),
+      appBar: CustomAppBar(),
       drawer: MyDrawer(userRepository: _userRepository),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

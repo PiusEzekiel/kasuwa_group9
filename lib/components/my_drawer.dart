@@ -2,12 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kasuwa/components/my_drawer_tile.dart';
+// import 'package:kasuwa/screens/cart/views/order_history.dart'; // Import the OrderHistoryScreen widget
 import 'package:kasuwa/screens/home/views/profile_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart'; // Import for Firebase Auth
 
 import '../screens/auth/blocs/sign_in_bloc/sign_in_bloc.dart';
 import '../screens/home/views/forum_screen.dart';
-import '../screens/cart/views/payment_screen.dart';
+import '../screens/cart/views/payment_option.dart';
+import '../screens/cart/views/order_history.dart';
 import '../screens/cart/views/cart_screen.dart';
 
 class MyDrawer extends StatefulWidget {
@@ -46,14 +48,14 @@ class _MyDrawerState extends State<MyDrawer> {
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     return Padding(
-                      padding: const EdgeInsets.only(top: 30.0, left: 20),
+                      padding: const EdgeInsets.only(top: 45.0, left: 45),
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          'Hi, ${snapshot.data}!',
+                          'Hi, ${snapshot.data}',
                           style: TextStyle(
                             color: Theme.of(context).colorScheme.primary,
-                            fontSize: 20.0,
+                            fontSize: 18.0,
                           ),
                         ),
                       ),
@@ -61,16 +63,16 @@ class _MyDrawerState extends State<MyDrawer> {
                   } else if (snapshot.hasError) {
                     return const Text('Error fetching username');
                   } else {
-                    return const CircularProgressIndicator();
+                    return const LinearProgressIndicator();
                   }
                 },
               ),
               Padding(
                 padding: const EdgeInsets.only(
-                    bottom: 20.0, top: 2, right: 20, left: 20),
+                    bottom: 20.0, top: 0, right: 45, left: 45),
                 child: Divider(
                   color: Theme.of(context).colorScheme.tertiary,
-                  thickness: 3,
+                  thickness: 1,
                 ),
               ),
 
@@ -119,14 +121,15 @@ class _MyDrawerState extends State<MyDrawer> {
                 },
               ),
 
-              //payment
+              //Orders
               MyDrawerTile(
-                text: 'P A Y M E N T',
-                icon: Icons.credit_card_outlined,
+                text: 'O R D E R S',
+                icon: Icons.receipt_long,
                 onTap: () {
                   Navigator.pop(context);
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return PaymentMethodsScreen();
+                  Navigator.push<void>(context,
+                      MaterialPageRoute(builder: (context) {
+                    return const OrderHistoryScreen(); // Use const here
                   }));
                 },
               ),

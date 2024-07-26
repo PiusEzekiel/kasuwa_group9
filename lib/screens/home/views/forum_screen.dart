@@ -125,24 +125,21 @@ class _ForumScreenState extends State<ForumScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Flexible(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                Icons.forum_outlined,
-                color: Theme.of(context).colorScheme.primary,
-                size: 28.0,
-              ),
-              const SizedBox(width: 8.0),
-              Text(
-                'Forum',
-                style: TextStyle(
-                    color: Theme.of(context).colorScheme.primary,
-                    fontSize: 24.0),
-              ),
-            ],
-          ),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.forum_outlined,
+              color: Theme.of(context).colorScheme.primary,
+              size: 28.0,
+            ),
+            const SizedBox(width: 8.0),
+            Text(
+              'Forum',
+              style: TextStyle(
+                  color: Theme.of(context).colorScheme.primary, fontSize: 24.0),
+            ),
+          ],
         ),
       ),
       body: FutureBuilder<String>(
