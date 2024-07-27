@@ -4,9 +4,7 @@ import 'package:kasuwa/blocs/cart_bloc/bloc/cart_bloc.dart';
 import 'package:kasuwa/components/my_drawer.dart';
 import 'package:kasuwa/screens/cart/models/cart_item.dart';
 import 'package:kasuwa/screens/home/blocs/get_kasuwa_bloc/get_kasuwa_bloc.dart';
-import 'package:kasuwa/screens/cart/views/cart_screen.dart';
 import 'package:kasuwa/screens/home/views/home_appbar.dart';
-import 'package:provider/provider.dart';
 // import '../../cart/models/cart_item.dart';
 import 'details_screen.dart';
 import 'package:kasuwa_repository/kasuwa_repository.dart';
@@ -14,7 +12,7 @@ import 'package:kasuwa_repository/kasuwa_repository.dart';
 class HomeScreen extends StatefulWidget {
   // final Kasuwa kasuwa;
   final List<Kasuwa> kasuwas; // Now it accepts a list
-  const HomeScreen({required this.kasuwas, Key? key}) : super(key: key);
+  const HomeScreen({required this.kasuwas, super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();

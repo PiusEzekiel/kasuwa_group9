@@ -45,7 +45,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           // Emit CartLoaded after adding to cart
           emit(CartLoaded(cartItems: await _loadCartItems()));
         } else {
-          emit(CartError(message: 'User not logged in'));
+          emit(const CartError(message: 'User not logged in'));
         }
       } catch (e) {
         emit(CartError(message: 'Error adding to cart: $e'));
@@ -65,7 +65,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           // Emit CartLoaded after removing from cart
           emit(CartLoaded(cartItems: await _loadCartItems()));
         } else {
-          emit(CartError(message: 'User not logged in'));
+          emit(const CartError(message: 'User not logged in'));
         }
       } catch (e) {
         emit(CartError(message: 'Error removing from cart: $e'));
@@ -85,7 +85,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           // Emit CartLoaded after updating quantity
           emit(CartLoaded(cartItems: await _loadCartItems()));
         } else {
-          emit(CartError(message: 'User not logged in'));
+          emit(const CartError(message: 'User not logged in'));
         }
       } catch (e) {
         emit(CartError(message: 'Error updating cart quantity: $e'));
@@ -109,7 +109,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           // Emit CartLoaded after clearing the cart
           emit(CartLoaded(cartItems: await _loadCartItems()));
         } else {
-          emit(CartError(message: 'User not logged in'));
+          emit(const CartError(message: 'User not logged in'));
         }
       } catch (e) {
         emit(CartError(message: 'Error clearing cart: $e'));

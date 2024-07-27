@@ -127,22 +127,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         title: Text(
                           'Edit Profile',
                           style: TextStyle(
-                              fontSize: 20,
+                              fontSize: 10,
                               color: Theme.of(context).colorScheme.tertiary),
                         ),
                         content: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            //Button to pick image from gallery
-                            ElevatedButton(
-                              onPressed: () {
-                                _pickImageFromGallery();
-                              },
-                              child: const Text('Pick Image'),
-                            ),
-                            if (_selectedImage != null)
-                              Image.file(_selectedImage!,
-                                  height: 100, width: 100, fit: BoxFit.cover),
                             Form(
                               key: _formKey,
                               child: TextFormField(
@@ -162,12 +152,46 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 },
                               ),
                             ),
-                            const SizedBox(height: 10),
-                            Text(
-                              "Your email: $_email",
-                              style: TextStyle(
-                                  color:
-                                      Theme.of(context).colorScheme.tertiary),
+                            // const SizedBox(height: 10),
+                            Column(
+                              children: [
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Your email: $_email",
+                                      style: TextStyle(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .tertiary),
+                                      textAlign: TextAlign.start,
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 15),
+                                //Button to pick image from gallery
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor:
+                                        Theme.of(context).colorScheme.tertiary,
+                                    foregroundColor: Colors.white,
+                                    minimumSize: const Size(250, 40),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    _pickImageFromGallery();
+                                  },
+                                  child: const Text('Select Profile Picture',
+                                      style: TextStyle(fontSize: 12)),
+                                ),
+                                if (_selectedImage != null)
+                                  Image.file(_selectedImage!,
+                                      height: 100,
+                                      width: 100,
+                                      fit: BoxFit.cover),
+                              ],
                             )
                           ],
                         ),
@@ -177,8 +201,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               Navigator.pop(context);
                             },
                             child: const Text('Cancel',
-                                style:
-                                    TextStyle(color: Colors.red, fontSize: 16)),
+                                style: TextStyle(
+                                  color: Colors.red,
+                                )),
                           ),
                           TextButton(
                             onPressed: () async {
@@ -192,9 +217,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 Navigator.of(context).pop();
                               }
                             },
-                            child: const Text(
+                            child: Text(
                               'Save',
-                              style: TextStyle(fontSize: 16),
+                              style: TextStyle(
+                                  color:
+                                      Theme.of(context).colorScheme.secondary),
                             ),
                           ),
                         ],
@@ -228,166 +255,174 @@ class _ProfileScreenState extends State<ProfileScreen> {
               return Padding(
                 padding: const EdgeInsets.only(
                     left: 30.0, top: 20, right: 30.0, bottom: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Center(
-                      child: CircleAvatar(
-                        backgroundColor: Theme.of(context).colorScheme.tertiary,
-                        radius: 100.0,
-                        backgroundImage: _imageUrl != null
-                            ? NetworkImage(_imageUrl!)
-                            : _selectedImage != null
-                                ? FileImage(_selectedImage!)
-                                : Image.asset(
-                                    'images/profile_image.png',
-                                    fit: BoxFit.cover,
-                                  ).image, // Use const AssetImage
-                      ),
-                    ),
-                    const SizedBox(height: 40.0),
-                    // if (_userName != null)
-                    Text(
-                      'Hi, $_userName',
-                      style: TextStyle(
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.w400,
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                    ),
-                    // const SizedBox(height: 8.0),
-                    Divider(
-                      color: Theme.of(context).colorScheme.tertiary,
-                      thickness: 2,
-                    ),
-
-                    const SizedBox(height: 25.0),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.shopping_cart,
-                              size: 30,
-                              color: Theme.of(context).colorScheme.tertiary,
-                            ),
-                            const SizedBox(width: 8.0),
-                            Text(
-                              'Cart: $_cartItemCount', // Display cart item count
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  color:
-                                      Theme.of(context).colorScheme.tertiary),
-                            ),
-                          ],
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Center(
+                        child: CircleAvatar(
+                          backgroundColor:
+                              Theme.of(context).colorScheme.tertiary,
+                          radius: 100.0,
+                          backgroundImage: _imageUrl != null
+                              ? NetworkImage(_imageUrl!)
+                              : _selectedImage != null
+                                  ? FileImage(_selectedImage!)
+                                  : Image.asset(
+                                      'images/profile_image.png',
+                                      fit: BoxFit.cover,
+                                    ).image, // Use const AssetImage
                         ),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.favorite,
-                              size: 30,
-                              color: Colors.red.shade600,
-                            ),
-                            const SizedBox(width: 8.0),
-                            Text('Likes: 7',
+                      ),
+                      const SizedBox(height: 40.0),
+                      // if (_userName != null)
+                      Text(
+                        'Hi, $_userName',
+                        style: TextStyle(
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.w400,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      ),
+                      // const SizedBox(height: 8.0),
+                      Divider(
+                        color: Theme.of(context).colorScheme.tertiary,
+                        thickness: 2,
+                      ),
+
+                      const SizedBox(height: 25.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.shopping_cart,
+                                size: 30,
+                                color: Theme.of(context).colorScheme.tertiary,
+                              ),
+                              const SizedBox(width: 8.0),
+                              Text(
+                                'Cart: $_cartItemCount', // Display cart item count
                                 style: TextStyle(
                                     fontSize: 18,
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .tertiary)),
-                          ],
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 25.0),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.credit_card,
-                          size: 30,
-                          color: Theme.of(context).colorScheme.tertiary,
-                        ),
-                        const SizedBox(width: 8.0),
-                        Text('Saved Card:',
-                            style: TextStyle(
-                                fontSize: 18.0,
-                                color: Theme.of(context).colorScheme.tertiary)),
-                        const Spacer(),
-                        Text('474 xxxx xxx xxx',
-                            style: TextStyle(
-                                fontSize: 18.0,
-                                color: Theme.of(context).colorScheme.tertiary)),
-                      ],
-                    ),
-
-                    const SizedBox(height: 25.0),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.message,
-                          size: 30,
-                          color: Theme.of(context).colorScheme.tertiary,
-                        ),
-                        const SizedBox(width: 8.0),
-                        Text('Receive messages',
-                            style: TextStyle(
-                                fontSize: 18.0,
-                                color: Theme.of(context).colorScheme.tertiary)),
-                        const Spacer(),
-                        const Icon(
-                          Icons.check_circle,
-                          color: Colors.green,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 25.0),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.notifications,
-                          size: 30,
-                          color: Theme.of(context).colorScheme.tertiary,
-                        ),
-                        const SizedBox(width: 8.0),
-                        Text('Notifications',
-                            style: TextStyle(
-                                fontSize: 18.0,
-                                color: Theme.of(context).colorScheme.tertiary)),
-                        const Spacer(),
-                        const Icon(
-                          Icons.check_circle,
-                          color: Colors.green,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 25.0),
-                    // Spacer(),
-                    InkWell(
-                      onTap: () {
-                        Navigator.pop(context);
-                        Navigator.push<void>(context,
-                            MaterialPageRoute(builder: (context) {
-                          return const OrderHistoryScreen(); // Use const here
-                        }));
-                      },
-                      child: Row(
+                                    color:
+                                        Theme.of(context).colorScheme.tertiary),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.favorite,
+                                size: 30,
+                                color: Colors.red.shade600,
+                              ),
+                              const SizedBox(width: 8.0),
+                              Text('Likes: 7',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .tertiary)),
+                            ],
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 25.0),
+                      Row(
                         children: [
                           Icon(
-                            Icons.receipt_long,
+                            Icons.credit_card,
                             size: 30,
                             color: Theme.of(context).colorScheme.tertiary,
                           ),
                           const SizedBox(width: 8.0),
-                          Text('View All Orders',
+                          Text('Saved Card:',
+                              style: TextStyle(
+                                  fontSize: 18.0,
+                                  color:
+                                      Theme.of(context).colorScheme.tertiary)),
+                          const Spacer(),
+                          Text('474 xxxx xxx xxx',
                               style: TextStyle(
                                   fontSize: 18.0,
                                   color:
                                       Theme.of(context).colorScheme.tertiary)),
                         ],
                       ),
-                    ),
-                  ],
+
+                      const SizedBox(height: 25.0),
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.message,
+                            size: 30,
+                            color: Theme.of(context).colorScheme.tertiary,
+                          ),
+                          const SizedBox(width: 8.0),
+                          Text('Receive messages',
+                              style: TextStyle(
+                                  fontSize: 18.0,
+                                  color:
+                                      Theme.of(context).colorScheme.tertiary)),
+                          const Spacer(),
+                          const Icon(
+                            Icons.check_circle,
+                            color: Colors.green,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 25.0),
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.notifications,
+                            size: 30,
+                            color: Theme.of(context).colorScheme.tertiary,
+                          ),
+                          const SizedBox(width: 8.0),
+                          Text('Notifications',
+                              style: TextStyle(
+                                  fontSize: 18.0,
+                                  color:
+                                      Theme.of(context).colorScheme.tertiary)),
+                          const Spacer(),
+                          const Icon(
+                            Icons.check_circle,
+                            color: Colors.green,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 25.0),
+                      // Spacer(),
+                      InkWell(
+                        onTap: () {
+                          Navigator.pop(context);
+                          Navigator.push<void>(context,
+                              MaterialPageRoute(builder: (context) {
+                            return const OrderHistoryScreen(); // Use const here
+                          }));
+                        },
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.receipt_long,
+                              size: 30,
+                              color: Theme.of(context).colorScheme.tertiary,
+                            ),
+                            const SizedBox(width: 8.0),
+                            Text('View All Orders',
+                                style: TextStyle(
+                                    fontSize: 18.0,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .tertiary)),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               );
             } else {

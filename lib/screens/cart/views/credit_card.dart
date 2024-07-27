@@ -33,14 +33,35 @@ class _CreditCardState extends State<CreditCard> {
       showDialog(
           context: context,
           builder: (context) => AlertDialog(
-                title: const Text('Confirm Payment'),
+                title: Text(
+                  'Confirm Payment',
+                  style: TextStyle(
+                      fontSize: 20,
+                      color: Theme.of(context).colorScheme.primary),
+                ),
                 content: SingleChildScrollView(
                   child: ListBody(
                     children: [
-                      Text('Card Number: ${selectedCardData!['cardNumber']}'),
-                      Text('Expiry Date: ${selectedCardData!['expiryDate']}'),
                       Text(
-                          'Card Holder Name: ${selectedCardData!['cardHolderName']}'),
+                        'Card Number: ${selectedCardData!['cardNumber']}',
+                        style: TextStyle(
+                            fontSize: 14,
+                            color: Theme.of(context).colorScheme.tertiary),
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
+                        'Expiry Date: ${selectedCardData!['expiryDate']}',
+                        style: TextStyle(
+                            fontSize: 14,
+                            color: Theme.of(context).colorScheme.tertiary),
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
+                        'Card Holder Name: ${selectedCardData!['cardHolderName']}',
+                        style: TextStyle(
+                            fontSize: 14,
+                            color: Theme.of(context).colorScheme.tertiary),
+                      ),
                       // Don't show CVV in the confirmation dialog
                     ],
                   ),
@@ -64,7 +85,11 @@ class _CreditCardState extends State<CreditCard> {
                               builder: (context) =>
                                   const PaymentSuccessScreen()));
                     },
-                    child: const Text('YES'),
+                    child: Text(
+                      'YES',
+                      style: TextStyle(
+                          color: Theme.of(context).colorScheme.secondary),
+                    ),
                   ),
                 ],
               ));
@@ -170,243 +195,253 @@ class _CreditCardState extends State<CreditCard> {
       body: Padding(
         padding:
             const EdgeInsets.only(bottom: 40.0, right: 20, left: 20, top: 10),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            // Display selected card in a CreditCardWidget
-            CreditCardWidget(
-              cardNumber: selectedCardData != null
-                  ? selectedCardData!['cardNumber']
-                  : cardNumber,
-              expiryDate: selectedCardData != null
-                  ? selectedCardData!['expiryDate']
-                  : expiryDate,
-              cardHolderName: selectedCardData != null
-                  ? selectedCardData!['cardHolderName']
-                  : cardHolderName, // Update cardHolderName here
-              cvvCode: selectedCardData != null
-                  ? selectedCardData!['cvvCode']
-                  : cvvCode,
-              showBackView: isCvvFocused,
-              onCreditCardWidgetChange: (p0) {},
-              // Add this line to show the cardholder name
-              cardType: CardType.mastercard, // You can set the card type here
-              // You can customize the appearance of the card here
-              cardBgColor: Theme.of(context).colorScheme.tertiary,
-              labelCardHolder: 'CARD HOLDER',
-              isHolderNameVisible: true,
-              enableFloatingCard: true,
-              backgroundImage: 'images/kasuwa_logo.png',
+        child: SingleChildScrollView(
+          child: SizedBox(
+            height: 705,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                // Display selected card in a CreditCardWidget
+                CreditCardWidget(
+                  cardNumber: selectedCardData != null
+                      ? selectedCardData!['cardNumber']
+                      : cardNumber,
+                  expiryDate: selectedCardData != null
+                      ? selectedCardData!['expiryDate']
+                      : expiryDate,
+                  cardHolderName: selectedCardData != null
+                      ? selectedCardData!['cardHolderName']
+                      : cardHolderName, // Update cardHolderName here
+                  cvvCode: selectedCardData != null
+                      ? selectedCardData!['cvvCode']
+                      : cvvCode,
+                  showBackView: isCvvFocused,
+                  onCreditCardWidgetChange: (p0) {},
+                  // Add this line to show the cardholder name
+                  cardType:
+                      CardType.mastercard, // You can set the card type here
+                  // You can customize the appearance of the card here
+                  cardBgColor: Theme.of(context).colorScheme.tertiary,
+                  labelCardHolder: 'CARD HOLDER',
+                  isHolderNameVisible: true,
+                  enableFloatingCard: true,
+                  backgroundImage: 'images/kasuwa_logo.png',
 
-              // chipColor: Theme.of(context).colorScheme.primary,
-              // height: 175,
-            ),
-            // Add new card button
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Visibility(
-                visible: !showForm, // Hide the button when the form is visible
-                child: InkWell(
-                  onTap: () {
-                    setState(() {
-                      showForm = true;
-                    });
-                  },
-                  // child: const Text('Add New Card'),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.end,
+                  // chipColor: Theme.of(context).colorScheme.primary,
+                  // height: 175,
+                ),
+                // Add new card button
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Visibility(
+                    visible:
+                        !showForm, // Hide the button when the form is visible
+                    child: InkWell(
+                      onTap: () {
+                        setState(() {
+                          showForm = true;
+                        });
+                      },
+                      // child: const Text('Add New Card'),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Icon(
+                            Icons.add_circle_outline_sharp,
+                            size: 40,
+                            color: Theme.of(context).colorScheme.tertiary,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                // Show the form only when showForm is true
+                if (showForm)
+                  Column(
                     children: [
-                      Icon(
-                        Icons.add_circle_outline_sharp,
-                        size: 40,
-                        color: Theme.of(context).colorScheme.tertiary,
+                      SizedBox(
+                        height: 250,
+                        child: CreditCardForm(
+                          cardNumber: cardNumber,
+                          expiryDate: expiryDate,
+                          cardHolderName:
+                              cardHolderName, // Update cardHolderName here
+                          cvvCode: cvvCode,
+                          cvvValidationMessage: 'Please input a valid CVV',
+                          dateValidationMessage: 'Please input a valid date',
+                          numberValidationMessage:
+                              'Please input a valid number',
+                          cardNumberValidator: _validateCardNumber,
+                          expiryDateValidator: _validateExpiryDate,
+                          cvvValidator: _validateCvvCode,
+                          obscureCvv: true,
+                          cardHolderValidator: _validateCardHolderName,
+                          onCreditCardModelChange: (data) {
+                            setState(() {
+                              cardNumber = data.cardNumber;
+                              expiryDate = data.expiryDate;
+                              cardHolderName =
+                                  data.cardHolderName; // Update the state
+                              cvvCode = data.cvvCode;
+                              // isCvvFocused = data.isCvvFocused;
+                            });
+                          },
+                          formKey: formKey,
+                        ),
+                      ),
+                      // Button to show/hide the form
+                      Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Row(
+                          children: [
+                            TextButton(
+                              onPressed: () {
+                                setState(() {
+                                  showForm = !showForm;
+                                });
+                              },
+                              child: const Text(
+                                'Cancel',
+                                style: TextStyle(
+                                  // color: Theme.of(context).colorScheme.tertiary,
+                                  color: Colors.red,
+                                  fontSize: 16.0,
+                                ),
+                                textAlign: TextAlign.left,
+                              ),
+                            ),
+                            const Spacer(),
+                            // Save button
+                            TextButton(
+                              onPressed: _saveCardDetails,
+                              // onHover: (isHovering) { },
+                              child: Text(
+                                'Save Card',
+                                style: TextStyle(
+                                  color:
+                                      Theme.of(context).colorScheme.secondary,
+                                  fontSize: 16.0,
+                                ),
+                                textAlign: TextAlign.left,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
-                ),
-              ),
-            ),
-            // Show the form only when showForm is true
-            if (showForm)
-              Column(
-                children: [
-                  SizedBox(
-                    height: 250,
-                    child: CreditCardForm(
-                      cardNumber: cardNumber,
-                      expiryDate: expiryDate,
-                      cardHolderName:
-                          cardHolderName, // Update cardHolderName here
-                      cvvCode: cvvCode,
-                      cvvValidationMessage: 'Please input a valid CVV',
-                      dateValidationMessage: 'Please input a valid date',
-                      numberValidationMessage: 'Please input a valid number',
-                      cardNumberValidator: _validateCardNumber,
-                      expiryDateValidator: _validateExpiryDate,
-                      cvvValidator: _validateCvvCode,
-                      obscureCvv: true,
-                      cardHolderValidator: _validateCardHolderName,
-                      onCreditCardModelChange: (data) {
-                        setState(() {
-                          cardNumber = data.cardNumber;
-                          expiryDate = data.expiryDate;
-                          cardHolderName =
-                              data.cardHolderName; // Update the state
-                          cvvCode = data.cvvCode;
-                          // isCvvFocused = data.isCvvFocused;
-                        });
-                      },
-                      formKey: formKey,
-                    ),
-                  ),
-                  // Button to show/hide the form
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: Row(
-                      children: [
-                        TextButton(
-                          onPressed: () {
-                            setState(() {
-                              showForm = !showForm;
-                            });
-                          },
-                          child: const Text(
-                            'Cancel',
-                            style: TextStyle(
-                              // color: Theme.of(context).colorScheme.tertiary,
-                              color: Colors.red,
-                              fontSize: 16.0,
-                            ),
-                            textAlign: TextAlign.left,
-                          ),
-                        ),
-                        const Spacer(),
-                        // Save button
-                        TextButton(
-                          onPressed: _saveCardDetails,
-                          // onHover: (isHovering) { },
-                          child: Text(
-                            'Save Card',
-                            style: TextStyle(
-                              color: Theme.of(context).colorScheme.tertiary,
-                              fontSize: 16.0,
-                            ),
-                            textAlign: TextAlign.left,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
 
-            if (!showForm)
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 15.0, bottom: 3),
-                    child: Text('choose a card to pay with!',
-                        style: TextStyle(
-                            fontSize: 16.0,
-                            color: Theme.of(context).colorScheme.tertiary),
-                        textAlign: TextAlign.start),
+                if (!showForm)
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 15.0, bottom: 3),
+                        child: Text('choose a card to pay with!',
+                            style: TextStyle(
+                                fontSize: 16.0,
+                                color: Theme.of(context).colorScheme.tertiary),
+                            textAlign: TextAlign.start),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            // Show the listview only when showForm is false
-            if (!showForm)
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: SizedBox(
-                  height: 330,
-                  child: StreamBuilder<QuerySnapshot>(
-                    stream: _firestore
-                        .collection('users')
-                        .doc(_auth.currentUser!.uid)
-                        .collection('cards')
-                        .snapshots(),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        final cards = snapshot.data!.docs;
+                // Show the listview only when showForm is false
+                if (!showForm)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: SizedBox(
+                      height: 310,
+                      child: StreamBuilder<QuerySnapshot>(
+                        stream: _firestore
+                            .collection('users')
+                            .doc(_auth.currentUser!.uid)
+                            .collection('cards')
+                            .snapshots(),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            final cards = snapshot.data!.docs;
 
-                        return ListView.builder(
-                          itemCount: cards.length,
-                          itemBuilder: (context, index) {
-                            final cardData =
-                                cards[index].data() as Map<String, dynamic>;
-                            final cardId = cards[index].id;
-                            return Card(
-                              child: Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: ListTile(
-                                  minVerticalPadding: 10,
-                                  onTap: () {
-                                    setState(() {
-                                      selectedCardData = cardData;
-                                      // Update the state variables used by CreditCardWidget
-                                      cardNumber = cardData['cardNumber'];
-                                      expiryDate = cardData['expiryDate'];
-                                      cardHolderName =
-                                          cardData['cardHolderName'];
-                                      cvvCode = cardData['cvvCode'];
-                                    });
-                                  },
-                                  title: Text(cardData['cardHolderName']),
-                                  subtitle: Text(
-                                      '**** **** **** ${cardData['cardNumber'].substring(12)}'),
-                                  trailing: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      IconButton(
-                                        onPressed: () {
-                                          _deleteCard(cardId);
-                                        },
-                                        icon: const Icon(Icons.delete,
-                                            color: Colors.red),
+                            return ListView.builder(
+                              itemCount: cards.length,
+                              itemBuilder: (context, index) {
+                                final cardData =
+                                    cards[index].data() as Map<String, dynamic>;
+                                final cardId = cards[index].id;
+                                return Card(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: ListTile(
+                                      minVerticalPadding: 10,
+                                      onTap: () {
+                                        setState(() {
+                                          selectedCardData = cardData;
+                                          // Update the state variables used by CreditCardWidget
+                                          cardNumber = cardData['cardNumber'];
+                                          expiryDate = cardData['expiryDate'];
+                                          cardHolderName =
+                                              cardData['cardHolderName'];
+                                          cvvCode = cardData['cvvCode'];
+                                        });
+                                      },
+                                      title: Text(cardData['cardHolderName']),
+                                      subtitle: Text(
+                                          '**** **** **** ${cardData['cardNumber'].substring(12)}'),
+                                      trailing: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          IconButton(
+                                            onPressed: () {
+                                              _deleteCard(cardId);
+                                            },
+                                            icon: const Icon(Icons.delete,
+                                                color: Colors.red),
+                                          ),
+                                        ],
                                       ),
-                                    ],
+                                    ),
                                   ),
-                                ),
-                              ),
+                                );
+                              },
                             );
-                          },
-                        );
-                      } else if (snapshot.hasError) {
-                        return Text('Error: ${snapshot.error}');
-                      } else {
-                        return const Center(child: CircularProgressIndicator());
-                      }
-                    },
+                          } else if (snapshot.hasError) {
+                            return Text('Error: ${snapshot.error}');
+                          } else {
+                            return const Center(
+                                child: CircularProgressIndicator());
+                          }
+                        },
+                      ),
+                    ),
+                  ),
+
+                const Spacer(),
+
+                //pay button
+                ElevatedButton(
+                  onPressed: selectedCardData != null ? userTappedPay : null,
+                  style: ElevatedButton.styleFrom(
+                    fixedSize: const Size(300, 50),
+                    backgroundColor: Theme.of(context).colorScheme.primary,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      'Pay Now',
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                        fontSize: 18.0,
+                      ),
+                    ),
                   ),
                 ),
-              ),
-
-            const Spacer(),
-
-            //pay button
-            ElevatedButton(
-              onPressed: selectedCardData != null ? userTappedPay : null,
-              style: ElevatedButton.styleFrom(
-                fixedSize: const Size(300, 50),
-                backgroundColor: Theme.of(context).colorScheme.primary,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'Pay Now',
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.onPrimary,
-                    fontSize: 18.0,
-                  ),
-                ),
-              ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );

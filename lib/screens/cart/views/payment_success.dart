@@ -69,7 +69,7 @@ class _PaymentSuccessScreenState extends State<PaymentSuccessScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final cartBloc = Provider.of<CartBloc>(context);
+    // final cartBloc = Provider.of<CartBloc>(context);
 
     return Scaffold(
       // appBar: AppBar(
@@ -212,11 +212,11 @@ class _PaymentSuccessScreenState extends State<PaymentSuccessScreen> {
                           ],
                         ),
                       ),
-                      Spacer(),
+                      const Spacer(),
                       // Clear cart button
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          fixedSize: Size(300, 50),
+                          fixedSize: const Size(300, 50),
                           backgroundColor:
                               Theme.of(context).colorScheme.primary,
                           foregroundColor: Colors.white,

@@ -8,6 +8,7 @@ class ForumScreen extends StatefulWidget {
   const ForumScreen({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _ForumScreenState createState() => _ForumScreenState();
 }
 
@@ -23,26 +24,6 @@ class _ForumScreenState extends State<ForumScreen> {
   void initState() {
     super.initState();
     _getCurrentUser();
-  }
-
-  void _getMessages() {
-    _firestore
-        .collection('messages')
-        .orderBy('timestamp', descending: false)
-        .snapshots()
-        .listen((snapshot) {
-      setState(() {
-        messages.clear();
-        for (var doc in snapshot.docs) {
-          messages.add({
-            'id': doc.id, // Add the document ID to the message map
-            'message': doc['message'],
-            'sender': doc['senderUsername'], // Use 'senderUsername' field
-            'isSender': doc['senderUsername'] == currentUsername,
-          });
-        }
-      });
-    });
   }
 
   void _sendMessage() async {
@@ -93,7 +74,7 @@ class _ForumScreenState extends State<ForumScreen> {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: const Text('Cancel'),
+              child: const Text('Cancel', style: TextStyle(color: Colors.red)),
             ),
             TextButton(
               onPressed: () {
@@ -103,7 +84,12 @@ class _ForumScreenState extends State<ForumScreen> {
                   Navigator.of(context).pop();
                 }
               },
-              child: const Text('Save'),
+              child: Text(
+                'Save',
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
+              ),
             ),
           ],
         );

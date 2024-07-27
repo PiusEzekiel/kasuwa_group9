@@ -21,7 +21,7 @@ class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     // Access the CartBloc using Provider.of
-    final cartBloc = Provider.of<CartBloc>(context);
+    // final cartBloc = Provider.of<CartBloc>(context);
     return Scaffold(
       appBar: AppBar(
         // leading: IconButton(
@@ -94,6 +94,9 @@ class _CartScreenState extends State<CartScreen> {
                               backgroundColor:
                                   Theme.of(context).colorScheme.primary,
                               foregroundColor: Colors.white,
+                              // shape: RoundedRectangleBorder(
+                              //   borderRadius: BorderRadius.circular(8.0),
+                              // ),
                             ),
                             onPressed: () {
                               Navigator.push(
@@ -126,7 +129,7 @@ class _CartScreenState extends State<CartScreen> {
 class CartItemWidget extends StatefulWidget {
   final CartItem cartItem;
 
-  const CartItemWidget({Key? key, required this.cartItem}) : super(key: key);
+  const CartItemWidget({super.key, required this.cartItem});
 
   @override
   State<CartItemWidget> createState() => _CartItemWidgetState();

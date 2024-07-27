@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kasuwa/blocs/cart_bloc/bloc/cart_bloc.dart';
-import 'package:kasuwa/screens/cart/models/cart_item.dart';
 // import 'package:kasuwa/screens/cart/views/order_history';
-import 'package:provider/provider.dart';
-import 'package:confetti/confetti.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -93,7 +89,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                   child: ExpansionTile(
                     title: Text(
                       'Order ID: $orderID',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                         // color: Theme.of(context).colorScheme.primary,
                       ),
