@@ -6,6 +6,7 @@
 
 
 
+
 Kasuwa is a mobile application to equip smallholder farmers with a secure and
 user-friendly platform to sell their produce to consumers
 
@@ -27,4 +28,5 @@ Kuwasa stands out with its;
 - Real-time Chat Support
 - Market insights
 - Feedback and Improvement System
+
 
