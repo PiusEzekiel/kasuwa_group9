@@ -30,3 +30,8 @@ Kuwasa stands out with its;
 - Feedback and Improvement System
 
 
+## Demo
+
+ Link to demo: https://drive.google.com/file/d/1VL-53qYNjlbDw8CUP93bP6pT5pmF4fk3/view?usp=sharing
+
+
