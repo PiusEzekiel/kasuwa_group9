@@ -4,7 +4,7 @@
 
 
 
-
+[Link to Kasuwa APK](https://drive.google.com/file/d/1sXFYA9daKNez6N-wUy9bsWcgI37_bftO/view?usp=sharing)
 
 
 Kasuwa is a mobile application to equip smallholder farmers with a secure and
